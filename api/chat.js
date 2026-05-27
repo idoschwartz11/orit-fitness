@@ -47,7 +47,7 @@ module.exports = async function handler(req, res) {
         systemInstruction: { parts: [{ text: systemPrompt }] },
         contents: [{ role: 'user', parts: [{ text: trimmed }] }],
         generationConfig: {
-          maxOutputTokens: 600,
+          maxOutputTokens: 2048,
           temperature: 0.7
         },
         safetySettings: [
