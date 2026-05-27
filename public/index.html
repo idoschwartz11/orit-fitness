@@ -1,0 +1,2463 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מתאמנים עם אורית שוורץ</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Rubik:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #4A90A4;
+    --primary-light: #6BAFC3;
+    --primary-dark: #2E6B7E;
+    --accent: #E8A87C;
+    --accent-light: #F2C4A0;
+    --green: #6BBF8E;
+    --green-light: #A8D8BF;
+    --purple: #9B8EC4;
+    --pink: #E8909A;
+    --bg: #F4F7F9;
+    --bg-card: #FFFFFF;
+    --text: #2C3E50;
+    --text-light: #7F8C8D;
+    --text-muted: #B0BEC5;
+    --shadow: 0 4px 20px rgba(74,144,164,0.12);
+    --shadow-hover: 0 8px 32px rgba(74,144,164,0.22);
+    --radius: 18px;
+    --radius-sm: 10px;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Heebo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ======= SCREENS ======= */
+  .screen { display:none; min-height:100vh; animation: fadeIn 0.4s ease; }
+  .screen.active { display:block; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+  /* ======= HERO SECTION ======= */
+  .hero-section {
+    width:100%; max-width:480px; margin-bottom:24px;
+  }
+
+  .hero-visual {
+    width:100%; margin-bottom:0;
+  }
+
+  .hero-illustration {
+    background: linear-gradient(135deg, #1a1a3e 0%, #2d1b69 40%, #1a3a5c 100%);
+    border-radius: 28px;
+    padding: 28px 20px 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(26,26,62,0.5);
+    margin-bottom: 0;
+  }
+
+  .hero-glow {
+    position:absolute; top:-40px; left:50%; transform:translateX(-50%);
+    width:200px; height:200px;
+    background: radial-gradient(circle, rgba(107,175,195,0.4) 0%, transparent 70%);
+    pointer-events:none;
+  }
+
+  .figure-group {
+    display:flex; justify-content:center; align-items:flex-end;
+    gap:6px; margin-bottom:16px; position:relative; z-index:2;
+  }
+
+  .figure {
+    font-size:42px; animation: bounce2 2s ease-in-out infinite;
+    filter: drop-shadow(0 4px 12px rgba(255,255,255,0.2));
+  }
+  .figure-1 { animation-delay:0s; font-size:36px; }
+  .figure-2 { animation-delay:0.3s; font-size:48px; }
+  .figure-3 { animation-delay:0.6s; font-size:52px; }
+  .figure-4 { animation-delay:0.9s; font-size:40px; }
+  .figure-5 { animation-delay:1.2s; font-size:32px; }
+  @keyframes bounce2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+  .hero-badge-1, .hero-badge-2, .hero-badge-3 {
+    position:absolute; background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.25);
+    border-radius:20px; padding:5px 12px; font-size:11px; font-weight:700;
+    color:white; z-index:3; animation: floatBadge 3s ease-in-out infinite;
+  }
+  .hero-badge-1 { top:16px; right:12px; animation-delay:0s; }
+  .hero-badge-2 { top:16px; left:12px; animation-delay:1s; }
+  .hero-badge-3 { bottom:60px; left:8px; animation-delay:2s; }
+  @keyframes floatBadge { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+
+  .hero-stats-row {
+    display:flex; justify-content:center; align-items:center;
+    gap:0; background:rgba(255,255,255,0.1); border-radius:16px;
+    padding:12px 10px; position:relative; z-index:2;
+  }
+  .hero-stat { text-align:center; flex:1; }
+  .hero-stat-div { width:1px; height:30px; background:rgba(255,255,255,0.2); }
+  .hs-num { display:block; font-size:22px; font-weight:900; color:white; font-family:'Rubik',sans-serif; }
+  .hs-lbl { display:block; font-size:10px; color:rgba(255,255,255,0.7); margin-top:1px; }
+
+  .hero-text {
+    background:white; border-radius:0 0 24px 24px;
+    padding:20px 20px 16px; margin-top:-8px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  }
+
+  .hero-chip {
+    display:inline-block; background:linear-gradient(135deg,#FFE0D0,#FFD0BC);
+    color:#7B3D2A; font-size:11px; font-weight:700;
+    padding:4px 12px; border-radius:20px; margin-bottom:10px;
+  }
+
+  .hero-title {
+    font-family:'Rubik',sans-serif; font-size:28px; font-weight:900;
+    color:#1a1a3e; line-height:1.15; margin-bottom:8px;
+  }
+
+  .hero-name-highlight {
+    background:linear-gradient(135deg, var(--primary), var(--purple));
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+
+  .hero-desc {
+    font-size:13px; color:var(--text-light); line-height:1.5; margin-bottom:12px;
+  }
+
+  .hero-features {
+    display:flex; flex-wrap:wrap; gap:6px;
+  }
+  .hf-item {
+    background:var(--bg); border-radius:20px; padding:5px 10px;
+    font-size:11px; font-weight:600; color:var(--text);
+    border:1px solid #E8EDF2;
+  }
+
+  /* Personal greeting */
+  .personal-greeting {
+    display:flex; align-items:center; gap:14px;
+    background:white; border-radius:var(--radius); padding:16px 18px;
+    box-shadow:var(--shadow); margin-bottom:16px;
+  }
+  .pg-avatar {
+    width:52px; height:52px; background:linear-gradient(135deg,var(--primary),var(--primary-light));
+    border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0;
+  }
+  .pg-name { font-size:17px; font-weight:800; color:var(--text); }
+  .pg-sub { font-size:12px; color:var(--text-light); margin-top:2px; }
+
+  /* Celebration overlay */
+  .celebration-overlay {
+    display:none; position:fixed; inset:0; z-index:500;
+    align-items:center; justify-content:center; background:rgba(0,0,0,0.6);
+    animation:fadeIn 0.3s;
+  }
+  .celebration-overlay.show { display:flex; }
+  .celebration-box {
+    background:white; border-radius:28px; padding:36px 28px; text-align:center;
+    max-width:320px; width:90%; animation:popIn 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
+    box-shadow:0 20px 60px rgba(0,0,0,0.3);
+  }
+  @keyframes popIn { from{transform:scale(0.5);opacity:0} to{transform:scale(1);opacity:1} }
+  .celebration-emoji { font-size:72px; margin-bottom:12px; animation:bounce2 0.6s ease infinite; }
+  .celebration-title { font-size:26px; font-weight:900; color:var(--text); margin-bottom:8px; font-family:'Rubik',sans-serif; }
+  .celebration-sub { font-size:15px; color:var(--text-light); margin-bottom:20px; line-height:1.5; }
+  .celebration-points { font-size:22px; font-weight:800; color:var(--green); margin-bottom:20px; }
+  .celebration-btn {
+    padding:14px 32px; background:linear-gradient(135deg,var(--green),#4DAA6E);
+    color:white; border:none; border-radius:var(--radius-sm); font-family:'Heebo',sans-serif;
+    font-size:16px; font-weight:700; cursor:pointer; width:100%;
+  }
+
+  /* Confetti particles */
+  .confetti-piece {
+    position:fixed; width:10px; height:10px; border-radius:2px;
+    animation:confettiFall 1.5s ease-out forwards; pointer-events:none; z-index:600;
+  }
+  @keyframes confettiFall {
+    0%{transform:translateY(-20px) rotate(0deg);opacity:1}
+    100%{transform:translateY(100vh) rotate(720deg);opacity:0}
+  }
+
+  /* Completed workout button style */
+  .workout-done-badge {
+    width:100%; margin-top:14px; padding:12px;
+    background:linear-gradient(135deg,#E8F5E9,#C8E6C9); color:#2E7D32;
+    border:2px solid #A5D6A7; border-radius:var(--radius-sm);
+    font-family:'Heebo',sans-serif; font-size:15px; font-weight:700; text-align:center;
+  }
+
+  /* ======= WELCOME SCREEN ======= */
+  #screen-welcome {
+    background: linear-gradient(145deg, #E8F4F8 0%, #F0EAF8 50%, #E8F5EE 100%);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:30px 20px; position:relative; overflow:hidden;
+  }
+  #screen-welcome.active { display:flex; }
+
+  .welcome-bg-circle {
+    position:absolute; border-radius:50%; opacity:0.15;
+    animation: float 6s ease-in-out infinite;
+  }
+  .welcome-bg-circle:nth-child(1) { width:300px;height:300px;background:var(--primary);top:-80px;right:-80px; }
+  .welcome-bg-circle:nth-child(2) { width:200px;height:200px;background:var(--accent);bottom:-50px;left:-50px;animation-delay:2s; }
+  .welcome-bg-circle:nth-child(3) { width:150px;height:150px;background:var(--green);top:40%;left:10%;animation-delay:4s; }
+  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+
+  .welcome-logo {
+    width:110px; height:110px; background:linear-gradient(135deg, var(--primary), var(--primary-light));
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:52px; margin-bottom:20px; box-shadow:0 8px 32px rgba(74,144,164,0.35);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+
+  .welcome-title {
+    font-family:'Rubik',sans-serif; font-size:32px; font-weight:800;
+    color:var(--primary-dark); text-align:center; line-height:1.2; margin-bottom:8px;
+  }
+  .welcome-subtitle { font-size:18px; color:var(--primary); text-align:center; margin-bottom:6px; font-weight:500; }
+  .welcome-tagline { font-size:14px; color:var(--text-light); text-align:center; margin-bottom:36px; }
+
+  .welcome-card {
+    background:white; border-radius:var(--radius); padding:28px 24px;
+    box-shadow:var(--shadow); width:100%; max-width:420px;
+  }
+  .welcome-card h3 { font-size:18px; font-weight:700; color:var(--text); margin-bottom:20px; text-align:center; }
+
+  .form-group { margin-bottom:16px; }
+  .form-group label { display:block; font-size:13px; font-weight:600; color:var(--text-light); margin-bottom:6px; }
+  .form-group input, .form-group select {
+    width:100%; padding:12px 14px; border:2px solid #E8EDF2; border-radius:var(--radius-sm);
+    font-family:'Heebo',sans-serif; font-size:15px; color:var(--text);
+    background:var(--bg); transition:all 0.2s; outline:none;
+  }
+  .form-group input:focus, .form-group select:focus { border-color:var(--primary); background:white; }
+
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+
+  .btn-primary {
+    width:100%; padding:15px; background:linear-gradient(135deg, var(--primary), var(--primary-light));
+    color:white; border:none; border-radius:var(--radius-sm); font-family:'Heebo',sans-serif;
+    font-size:17px; font-weight:700; cursor:pointer; transition:all 0.2s;
+    box-shadow:0 4px 15px rgba(74,144,164,0.35); margin-top:8px;
+  }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(74,144,164,0.45); }
+  .btn-primary:active { transform:translateY(0); }
+
+  /* ======= MAIN APP ======= */
+  #screen-app { display:flex; flex-direction:column; min-height:100vh; }
+  #screen-app.active { display:flex; }
+
+  /* Header */
+  .app-header {
+    background:linear-gradient(135deg, var(--primary-dark), var(--primary));
+    padding:16px 20px; display:flex; align-items:center; justify-content:space-between;
+    position:sticky; top:0; z-index:100; box-shadow:0 4px 20px rgba(46,107,126,0.3);
+  }
+  .header-user { display:flex; align-items:center; gap:10px; }
+  .header-avatar {
+    width:42px; height:42px; background:rgba(255,255,255,0.25); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:20px;
+  }
+  .header-name { color:white; font-size:14px; font-weight:600; }
+  .header-class { color:rgba(255,255,255,0.75); font-size:12px; }
+  .header-logo { font-size:26px; }
+  .header-points { background:rgba(255,255,255,0.2); border-radius:20px; padding:4px 12px; color:white; font-size:13px; font-weight:600; }
+
+  /* Nav */
+  .app-nav {
+    background:white; border-top:1px solid #E8EDF2;
+    display:flex; justify-content:space-around; padding:8px 0;
+    position:fixed; bottom:0; width:100%; z-index:100;
+    box-shadow:0 -4px 20px rgba(0,0,0,0.08);
+  }
+  .nav-btn {
+    display:flex; flex-direction:column; align-items:center; gap:3px;
+    background:none; border:none; cursor:pointer; padding:6px 10px;
+    border-radius:var(--radius-sm); transition:all 0.2s; min-width:58px;
+  }
+  .nav-btn span.icon { font-size:22px; }
+  .nav-btn span.label { font-size:10px; font-weight:600; color:var(--text-light); }
+  .nav-btn.active span.label { color:var(--primary); }
+  .nav-btn.active span.icon { filter:drop-shadow(0 2px 4px rgba(74,144,164,0.4)); }
+  .nav-btn:hover { background:var(--bg); }
+
+  /* Content area */
+  .app-content { flex:1; padding:20px 16px 90px; overflow-y:auto; }
+
+  /* Section */
+  .section { display:none; animation: fadeIn 0.3s ease; }
+  .section.active { display:block; }
+
+  .section-title {
+    font-family:'Rubik',sans-serif; font-size:22px; font-weight:800;
+    color:var(--text); margin-bottom:16px; display:flex; align-items:center; gap:8px;
+  }
+
+  /* ======= HOME SECTION ======= */
+  .stats-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
+  .stat-card {
+    background:white; border-radius:var(--radius); padding:18px 16px;
+    box-shadow:var(--shadow); text-align:center;
+  }
+  .stat-icon { font-size:28px; margin-bottom:6px; }
+  .stat-value { font-size:24px; font-weight:800; color:var(--primary); }
+  .stat-label { font-size:11px; color:var(--text-light); font-weight:500; }
+
+  .bmi-card {
+    background:linear-gradient(135deg, var(--primary), var(--primary-light));
+    border-radius:var(--radius); padding:20px; color:white; margin-bottom:20px;
+    box-shadow:0 4px 20px rgba(74,144,164,0.3);
+  }
+  .bmi-card h3 { font-size:16px; opacity:0.85; margin-bottom:10px; }
+  .bmi-value { font-size:42px; font-weight:900; margin-bottom:4px; }
+  .bmi-status { font-size:16px; font-weight:600; opacity:0.9; }
+  .bmi-bar { background:rgba(255,255,255,0.3); border-radius:20px; height:8px; margin-top:14px; overflow:hidden; }
+  .bmi-bar-fill { height:100%; border-radius:20px; background:white; transition:width 1s; }
+
+  .quick-start-title { font-size:16px; font-weight:700; color:var(--text); margin-bottom:12px; }
+  .quick-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .quick-card {
+    border-radius:var(--radius); padding:18px 14px; cursor:pointer;
+    transition:all 0.2s; box-shadow:var(--shadow); text-align:center;
+  }
+  .quick-card:hover { transform:translateY(-3px); box-shadow:var(--shadow-hover); }
+  .quick-card .q-icon { font-size:32px; margin-bottom:8px; }
+  .quick-card .q-title { font-size:14px; font-weight:700; }
+  .quick-card .q-sub { font-size:11px; margin-top:3px; opacity:0.8; }
+  .quick-card.strength { background:linear-gradient(135deg,#FFE0D0,#FFD0BC); color:#7B3D2A; }
+  .quick-card.cardio { background:linear-gradient(135deg,#D0EAF5,#BCE0F0); color:#1B5E7A; }
+  .quick-card.nutrition { background:linear-gradient(135deg,#D5F0E0,#BDE8CE); color:#1B5E40; }
+  .quick-card.ask { background:linear-gradient(135deg,#EAD5F5,#D8BCE8); color:#4A1B7A; }
+
+  /* ======= WORKOUT SECTION ======= */
+  .tabs { display:flex; gap:8px; margin-bottom:20px; overflow-x:auto; padding-bottom:4px; }
+  .tab-btn {
+    padding:8px 18px; border-radius:20px; border:2px solid #E8EDF2;
+    background:white; font-family:'Heebo',sans-serif; font-size:13px; font-weight:600;
+    cursor:pointer; transition:all 0.2s; white-space:nowrap; color:var(--text-light);
+  }
+  .tab-btn.active { background:var(--primary); border-color:var(--primary); color:white; }
+
+  .difficulty-filter { display:flex; gap:8px; margin-bottom:16px; }
+  .diff-btn {
+    padding:6px 14px; border-radius:20px; border:2px solid; font-size:12px; font-weight:700;
+    cursor:pointer; transition:all 0.2s; background:white;
+  }
+  .diff-btn.easy { border-color:var(--green); color:var(--green); }
+  .diff-btn.easy.active { background:var(--green); color:white; }
+  .diff-btn.medium { border-color:var(--accent); color:var(--accent); }
+  .diff-btn.medium.active { background:var(--accent); color:white; }
+  .diff-btn.hard { border-color:var(--pink); color:var(--pink); }
+  .diff-btn.hard.active { background:var(--pink); color:white; }
+
+  .workout-card {
+    background:white; border-radius:var(--radius); margin-bottom:14px;
+    box-shadow:var(--shadow); overflow:hidden; transition:all 0.2s;
+  }
+  .workout-card:hover { box-shadow:var(--shadow-hover); transform:translateY(-2px); }
+  .workout-card-header { padding:16px 18px; display:flex; align-items:center; gap:12px; }
+  .workout-icon-wrap {
+    width:50px; height:50px; border-radius:14px;
+    display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0;
+  }
+  .workout-info { flex:1; }
+  .workout-name { font-size:16px; font-weight:700; color:var(--text); }
+  .workout-meta { font-size:12px; color:var(--text-light); margin-top:2px; }
+  .workout-badges { display:flex; gap:6px; margin-top:6px; flex-wrap:wrap; }
+  .badge {
+    padding:3px 10px; border-radius:10px; font-size:11px; font-weight:700;
+  }
+  .badge.easy { background:#E8F8EE; color:#2E7D52; }
+  .badge.medium { background:#FFF3E0; color:#E65100; }
+  .badge.hard { background:#FCE4EC; color:#C62828; }
+  .badge.sets { background:#E3F2FD; color:#1565C0; }
+  .badge.time { background:#F3E5F5; color:#6A1B9A; }
+
+  .workout-expand-btn {
+    background:none; border:none; cursor:pointer; font-size:20px; padding:4px;
+    transition:transform 0.2s; color:var(--text-light);
+  }
+
+  .workout-details { padding:0 18px 18px; display:none; }
+  .workout-details.open { display:block; animation:fadeIn 0.3s ease; }
+
+  .exercise-list { list-style:none; }
+  .exercise-list li {
+    padding:10px 14px; background:var(--bg); border-radius:var(--radius-sm);
+    margin-bottom:8px; font-size:14px; display:flex; align-items:center; gap:8px;
+  }
+  .exercise-list li::before { content:'▸'; color:var(--primary); font-weight:bold; }
+
+  /* Timer */
+  .timer-panel {
+    background:linear-gradient(135deg, var(--text), #3D5A6A);
+    border-radius:var(--radius); padding:20px; margin-top:14px; text-align:center; color:white;
+  }
+  .timer-display { font-size:52px; font-weight:900; letter-spacing:2px; margin-bottom:14px; font-family:'Rubik',sans-serif; }
+  .timer-controls { display:flex; gap:10px; justify-content:center; }
+  .timer-btn {
+    padding:10px 22px; border-radius:var(--radius-sm); border:none; cursor:pointer;
+    font-family:'Heebo',sans-serif; font-size:14px; font-weight:700; transition:all 0.2s;
+  }
+  .timer-btn.start { background:var(--green); color:white; }
+  .timer-btn.pause { background:var(--accent); color:white; }
+  .timer-btn.reset { background:rgba(255,255,255,0.2); color:white; }
+
+  .sets-counter { display:flex; align-items:center; gap:12px; justify-content:center; margin-top:14px; }
+  .sets-btn {
+    width:36px; height:36px; border-radius:50%; border:none; cursor:pointer;
+    font-size:20px; font-weight:700; background:rgba(255,255,255,0.2); color:white; transition:all 0.2s;
+  }
+  .sets-btn:hover { background:rgba(255,255,255,0.35); }
+  .sets-info { font-size:16px; color:white; font-weight:600; }
+
+  /* Video */
+  .video-section { margin-top:14px; }
+  .video-section h4 { font-size:14px; font-weight:700; color:var(--text-light); margin-bottom:10px; }
+  .video-placeholder {
+    background:linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius:var(--radius-sm); height:180px; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; cursor:pointer; transition:all 0.2s;
+    position:relative; overflow:hidden;
+  }
+  .video-placeholder:hover { transform:scale(1.02); }
+  .play-btn {
+    width:60px; height:60px; background:rgba(255,255,255,0.9); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:8px;
+  }
+  .video-title { color:white; font-size:13px; font-weight:600; }
+  .video-link { color:rgba(255,255,255,0.6); font-size:11px; margin-top:4px; }
+
+  /* Music */
+  .music-player {
+    background:linear-gradient(135deg, #1DB954, #14833B);
+    border-radius:var(--radius-sm); padding:14px 16px; margin-top:12px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .music-icon { font-size:30px; animation: spin 3s linear infinite; }
+  @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+  .music-info { flex:1; }
+  .music-title { color:white; font-size:13px; font-weight:700; }
+  .music-artist { color:rgba(255,255,255,0.7); font-size:11px; }
+  .music-ctrl { background:rgba(255,255,255,0.2); border:none; border-radius:50%; width:34px; height:34px; color:white; font-size:14px; cursor:pointer; }
+
+  /* ======= NUTRITION SECTION ======= */
+  .nutrition-hero {
+    background:linear-gradient(135deg, #2E7D52, var(--green));
+    border-radius:var(--radius); padding:20px; color:white; margin-bottom:20px;
+    text-align:center; box-shadow:0 4px 20px rgba(46,125,82,0.3);
+  }
+  .nutrition-hero h2 { font-size:22px; font-weight:800; margin-bottom:4px; }
+  .nutrition-hero p { font-size:13px; opacity:0.85; }
+
+  .meal-day {
+    background:white; border-radius:var(--radius); padding:18px; margin-bottom:14px;
+    box-shadow:var(--shadow);
+  }
+  .meal-day h3 { font-size:16px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:6px; }
+  .meal {
+    background:var(--bg); border-radius:var(--radius-sm); padding:12px 14px; margin-bottom:8px;
+    border-right:4px solid var(--green);
+  }
+  .meal-time { font-size:11px; font-weight:700; color:var(--green); text-transform:uppercase; margin-bottom:4px; }
+  .meal-name { font-size:14px; font-weight:600; color:var(--text); }
+  .meal-desc { font-size:12px; color:var(--text-light); margin-top:3px; }
+  .meal-calories { font-size:12px; font-weight:700; color:var(--accent); margin-top:4px; }
+
+  .water-reminder {
+    background:linear-gradient(135deg, #E3F2FD, #BBDEFB);
+    border-radius:var(--radius); padding:16px; margin-bottom:16px;
+    display:flex; align-items:center; gap:12px;
+  }
+  .water-icon { font-size:36px; }
+  .water-text h4 { font-size:15px; font-weight:700; color:#1565C0; }
+  .water-text p { font-size:12px; color:#1976D2; margin-top:2px; }
+
+  .calorie-chart {
+    background:white; border-radius:var(--radius); padding:18px; margin-bottom:16px;
+    box-shadow:var(--shadow);
+  }
+  .calorie-chart h3 { font-size:15px; font-weight:700; margin-bottom:14px; }
+  .macro-bar { margin-bottom:10px; }
+  .macro-label { font-size:12px; font-weight:600; color:var(--text-light); display:flex; justify-content:space-between; margin-bottom:4px; }
+  .macro-track { background:#F0F4F8; border-radius:10px; height:10px; overflow:hidden; }
+  .macro-fill { height:100%; border-radius:10px; transition:width 1.5s ease; }
+  .macro-fill.protein { background:linear-gradient(90deg, var(--primary), var(--primary-light)); }
+  .macro-fill.carbs { background:linear-gradient(90deg, var(--accent), var(--accent-light)); }
+  .macro-fill.fat { background:linear-gradient(90deg, var(--pink), #F0A0AB); }
+
+  /* ======= PROGRESS SECTION ======= */
+  .progress-header {
+    background:linear-gradient(135deg, var(--purple), #7B6BB0);
+    border-radius:var(--radius); padding:20px; color:white; margin-bottom:20px;
+    text-align:center;
+  }
+  .achievements { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
+  .achievement-card {
+    background:white; border-radius:var(--radius); padding:16px; text-align:center;
+    box-shadow:var(--shadow);
+  }
+  .achievement-icon { font-size:32px; margin-bottom:8px; }
+  .achievement-title { font-size:13px; font-weight:700; color:var(--text); }
+  .achievement-desc { font-size:11px; color:var(--text-light); margin-top:3px; }
+  .achievement-card.locked { opacity:0.5; }
+  .achievement-card.locked .achievement-icon { filter:grayscale(1); }
+
+  .weekly-log {
+    background:white; border-radius:var(--radius); padding:18px; margin-bottom:16px;
+    box-shadow:var(--shadow);
+  }
+  .weekly-log h3 { font-size:15px; font-weight:700; margin-bottom:14px; }
+  .week-days { display:flex; gap:6px; justify-content:space-between; }
+  .day-dot {
+    width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:700; flex-direction:column;
+  }
+  .day-dot.done { background:var(--green); color:white; }
+  .day-dot.today { background:var(--primary); color:white; border:3px solid var(--primary-dark); }
+  .day-dot.empty { background:#F0F4F8; color:var(--text-muted); }
+  .day-name { font-size:9px; margin-top:1px; }
+
+  /* ======= ASK SECTION ======= */
+  .ask-header {
+    background:linear-gradient(135deg, var(--purple), var(--pink));
+    border-radius:var(--radius); padding:20px; color:white; margin-bottom:20px; text-align:center;
+  }
+  .chat-container {
+    background:white; border-radius:var(--radius); padding:16px;
+    box-shadow:var(--shadow); min-height:320px; max-height:400px; overflow-y:auto;
+    margin-bottom:14px; display:flex; flex-direction:column; gap:10px;
+  }
+  .msg { max-width:85%; padding:12px 14px; border-radius:16px; font-size:14px; line-height:1.5; }
+  .msg.ai { background:var(--bg); color:var(--text); align-self:flex-start; border-bottom-right-radius:4px; border-right:3px solid var(--purple); }
+  .msg.user { background:var(--primary); color:white; align-self:flex-end; border-bottom-left-radius:4px; }
+  .msg-sender { font-size:11px; font-weight:700; margin-bottom:4px; opacity:0.7; }
+
+  .quick-questions { margin-bottom:14px; }
+  .quick-questions h4 { font-size:13px; font-weight:600; color:var(--text-light); margin-bottom:8px; }
+  .quick-q-grid { display:flex; flex-wrap:wrap; gap:8px; }
+  .quick-q-btn {
+    padding:7px 14px; border-radius:20px; border:2px solid var(--purple);
+    background:white; color:var(--purple); font-family:'Heebo',sans-serif; font-size:12px;
+    font-weight:600; cursor:pointer; transition:all 0.2s;
+  }
+  .quick-q-btn:hover { background:var(--purple); color:white; }
+
+  .ask-input-area { display:flex; gap:8px; }
+  .ask-input {
+    flex:1; padding:12px 16px; border:2px solid #E8EDF2; border-radius:var(--radius-sm);
+    font-family:'Heebo',sans-serif; font-size:14px; outline:none; transition:border-color 0.2s;
+    background:var(--bg);
+  }
+  .ask-input:focus { border-color:var(--purple); background:white; }
+  .ask-send-btn {
+    padding:12px 18px; background:linear-gradient(135deg, var(--purple), var(--pink));
+    color:white; border:none; border-radius:var(--radius-sm); cursor:pointer;
+    font-size:18px; transition:all 0.2s;
+  }
+  .msg-time { font-size:10px; opacity:0.5; margin-top:4px; text-align:left; }
+  .ask-send-btn:disabled { cursor:not-allowed; }
+
+  /* Loading spinner */
+  .typing { display:flex; gap:5px; padding:12px 14px; background:var(--bg); border-radius:16px; width:fit-content; }
+  .typing span { width:8px; height:8px; background:var(--text-light); border-radius:50%; animation:bounce 1s infinite; }
+  .typing span:nth-child(2) { animation-delay:0.2s; }
+  .typing span:nth-child(3) { animation-delay:0.4s; }
+  @keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-8px)} }
+
+  /* Modal */
+  .modal-overlay {
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5);
+    z-index:200; align-items:flex-end; animation:fadeIn 0.2s;
+  }
+  .modal-overlay.open { display:flex; }
+  .modal {
+    background:white; border-radius:var(--radius) var(--radius) 0 0;
+    padding:24px 20px 40px; width:100%; max-height:85vh; overflow-y:auto;
+    animation:slideUp 0.3s ease;
+  }
+  @keyframes slideUp { from{transform:translateY(100%)} to{transform:translateY(0)} }
+  .modal-title { font-size:20px; font-weight:800; margin-bottom:16px; display:flex; justify-content:space-between; align-items:center; }
+  .modal-close { background:none; border:none; font-size:24px; cursor:pointer; color:var(--text-light); }
+
+  /* Toast */
+  .toast {
+    position:fixed; top:80px; left:50%; transform:translateX(-50%);
+    background:var(--text); color:white; padding:10px 20px; border-radius:20px;
+    font-size:13px; font-weight:600; z-index:300; opacity:0; transition:opacity 0.3s;
+    pointer-events:none;
+  }
+  .toast.show { opacity:1; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width:4px; }
+  ::-webkit-scrollbar-track { background:transparent; }
+  ::-webkit-scrollbar-thumb { background:var(--primary-light); border-radius:10px; }
+
+  .motivation-banner {
+    background:linear-gradient(135deg, var(--accent), #D4935A);
+    border-radius:var(--radius); padding:14px 18px; margin-bottom:20px; color:white;
+    display:flex; align-items:center; gap:12px;
+  }
+  .motivation-banner .m-icon { font-size:28px; }
+  .motivation-banner p { font-size:14px; font-weight:600; line-height:1.4; }
+
+  .rest-day-tip {
+    background:linear-gradient(135deg, #FFF3E0, #FFE0B2);
+    border-radius:var(--radius-sm); padding:12px 16px; margin-top:12px;
+    border-right:4px solid var(--accent);
+  }
+  .rest-day-tip p { font-size:13px; color:#BF360C; font-weight:500; }
+  /* ===== GUIDED WORKOUT ===== */
+  .guided-overlay {
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.75);
+    z-index:400; align-items:flex-end; justify-content:center;
+  }
+  .guided-overlay.open { display:flex; animation:fadeIn 0.3s; }
+
+  .guided-modal {
+    background:var(--bg); border-radius:28px 28px 0 0;
+    width:100%; max-width:500px; padding:0 0 30px;
+    animation:slideUp 0.35s cubic-bezier(0.34,1.56,0.64,1);
+    max-height:95vh; overflow-y:auto;
+  }
+
+  .guided-header {
+    background:linear-gradient(135deg,var(--primary-dark),var(--primary));
+    padding:16px 20px 14px; border-radius:28px 28px 0 0;
+  }
+  .guided-progress-wrap {
+    background:rgba(255,255,255,0.25); border-radius:10px; height:6px;
+    margin-bottom:12px; overflow:hidden;
+  }
+  .guided-progress-bar {
+    height:100%; background:white; border-radius:10px;
+    transition:width 0.5s ease; width:0%;
+  }
+  .guided-header-row { display:flex; justify-content:space-between; align-items:center; }
+  .guided-workout-name { color:white; font-size:16px; font-weight:800; }
+  .guided-step-label { color:rgba(255,255,255,0.8); font-size:12px; margin-top:2px; }
+  .guided-close-btn {
+    background:rgba(255,255,255,0.2); border:none; color:white;
+    width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:14px;
+    display:flex; align-items:center; justify-content:center;
+  }
+
+  .guided-phase-banner {
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    padding:14px 20px; font-size:18px; font-weight:800;
+    transition:all 0.4s;
+  }
+  .guided-phase-banner.work { background:linear-gradient(135deg,#E8F8EE,#D5F0E0); color:#1B5E40; }
+  .guided-phase-banner.rest { background:linear-gradient(135deg,#E3F2FD,#BBDEFB); color:#1565C0; }
+  .guided-phase-banner.prepare { background:linear-gradient(135deg,#FFF3E0,#FFE0B2); color:#E65100; }
+  .guided-phase-banner.done { background:linear-gradient(135deg,#F3E5F5,#E1BEE7); color:#6A1B9A; }
+  .guided-phase-icon { font-size:28px; }
+
+  .guided-exercise-card {
+    background:white; border-radius:var(--radius); margin:12px 16px;
+    padding:20px; text-align:center; box-shadow:var(--shadow);
+  }
+  .guided-ex-icon { font-size:56px; margin-bottom:8px; }
+  .guided-ex-name { font-size:22px; font-weight:900; color:var(--text); font-family:'Rubik',sans-serif; }
+  .guided-ex-reps {
+    font-size:28px; font-weight:900; color:var(--primary); margin:8px 0 4px;
+    font-family:'Rubik',sans-serif;
+  }
+  .guided-ex-tip { font-size:13px; color:var(--text-light); }
+
+  .guided-timer-wrap {
+    position:relative; width:140px; height:140px;
+    margin:8px auto 0;
+  }
+  .guided-timer-svg { width:140px; height:140px; }
+  .guided-timer-inner {
+    position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+  }
+  .guided-timer-num {
+    font-size:42px; font-weight:900; color:var(--text);
+    font-family:'Rubik',sans-serif; line-height:1;
+  }
+  .guided-timer-label { font-size:11px; color:var(--text-light); font-weight:600; }
+
+  .guided-next {
+    text-align:center; padding:8px 20px 0; min-height:24px;
+  }
+
+  .guided-controls {
+    display:flex; gap:12px; padding:12px 20px 0;
+  }
+  .guided-ctrl-btn {
+    flex:1; padding:13px; border-radius:var(--radius-sm); border:none;
+    font-family:'Heebo',sans-serif; font-size:15px; font-weight:700; cursor:pointer;
+    transition:all 0.2s;
+  }
+  .guided-ctrl-btn.skip { background:#F0F4F8; color:var(--text); }
+  .guided-ctrl-btn.pause { background:var(--primary); color:white; }
+  .guided-ctrl-btn.pause.paused { background:var(--accent); }
+
+</style>
+</head>
+<body>
+
+<!-- Welcome Screen -->
+<div id="screen-welcome" class="screen active">
+  <div class="welcome-bg-circle"></div>
+  <div class="welcome-bg-circle"></div>
+  <div class="welcome-bg-circle"></div>
+
+  <!-- HERO SECTION -->
+  <div class="hero-section">
+    <div class="hero-visual">
+      <!-- Animated fitness figures -->
+      <div class="hero-illustration">
+        <div class="hero-glow"></div>
+        <div class="figure-group">
+          <div class="figure figure-1">🏃‍♀️</div>
+          <div class="figure figure-2">💪</div>
+          <div class="figure figure-3">🏋️‍♂️</div>
+          <div class="figure figure-4">🤸‍♀️</div>
+          <div class="figure figure-5">⚡</div>
+        </div>
+        <div class="hero-badge-1">🔥 +100 אימונים</div>
+        <div class="hero-badge-2">⭐ 4.9 דירוג</div>
+        <div class="hero-badge-3">💪 כוח אמיתי</div>
+
+        <div class="hero-stats-row">
+          <div class="hero-stat"><span class="hs-num">500+</span><span class="hs-lbl">תלמידים</span></div>
+          <div class="hero-stat-div"></div>
+          <div class="hero-stat"><span class="hs-num">30+</span><span class="hs-lbl">אימונים</span></div>
+          <div class="hero-stat-div"></div>
+          <div class="hero-stat"><span class="hs-num">3</span><span class="hs-lbl">רמות קושי</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-text">
+      <div class="hero-chip">🏅 תוכנית כושר לבית הספר</div>
+      <h1 class="hero-title">מתאמנים עם<br><span class="hero-name-highlight">אורית שוורץ</span></h1>
+      <p class="hero-desc">כי הגוף שלך שווה את זה! 💫<br>אימוני כוח, אירובי, תזונה ועוד</p>
+      <div class="hero-features">
+        <div class="hf-item">⚡ אימונים לפי דרגות</div>
+        <div class="hf-item">🎵 מוזיקה + סרטונים</div>
+        <div class="hf-item">🤖 AI שעונה לשאלות</div>
+        <div class="hf-item">🏆 מעקב התקדמות</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM CARD -->
+  <div class="welcome-card">
+    <h3>👋 ספר לנו קצת עליך</h3>
+
+    <div class="form-group">
+      <label>שם מלא</label>
+      <input type="text" id="inp-name" placeholder="שמך הפרטי ושם המשפחה" maxlength="50" autocomplete="name" />
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>קבוצה / כיתה / מסגרת</label>
+        <input type="text" id="inp-class" placeholder="כיתה, קבוצה, מועדון..." maxlength="50" />
+      </div>
+      <div class="form-group">
+        <label>גיל</label>
+        <input type="number" id="inp-age" placeholder="גיל" min="5" max="99" />
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>גובה (ס"מ)</label>
+        <input type="number" id="inp-height" placeholder="160" min="120" max="220" />
+      </div>
+      <div class="form-group">
+        <label>משקל (ק"ג)</label>
+        <input type="number" id="inp-weight" placeholder="55" min="30" max="150" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>רמת כושר נוכחית</label>
+      <select id="inp-fitness">
+        <option value="">בחר/י...</option>
+        <option value="מתחיל">מתחיל/ת – כמעט לא מתאמן/ת</option>
+        <option value="בינוני">בינוני – מתאמן/ת לפעמים</option>
+        <option value="מתקדם">מתקדם/ת – מתאמן/ת בקביעות</option>
+        <option value="ספורטאי">ספורטאי/ת פעיל/ה</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>מטרה עיקרית</label>
+      <select id="inp-goal">
+        <option value="">בחר/י...</option>
+        <option value="ירידה במשקל">ירידה במשקל</option>
+        <option value="בניית שריר">בניית שריר</option>
+        <option value="שיפור כושר">שיפור כושר אירובי</option>
+        <option value="גמישות">גמישות וגוף בריא</option>
+        <option value="ספורט">שיפור ביצועים ספורטיביים</option>
+        <option value="בריאות כללית">בריאות כללית ואיכות חיים</option>
+        <option value="הרזיה לאחר לידה">חזרה לכושר לאחר לידה</option>
+        <option value="כושר גיל הזהב">כושר פונקציונלי – גיל הזהב</option>
+      </select>
+    </div>
+
+    <button class="btn-primary" onclick="startApp()">🚀 בואו נתחיל!</button>
+  </div>
+</div>
+
+<!-- Main App -->
+<div id="screen-app" class="screen">
+  <header class="app-header">
+    <div class="header-user">
+      <div class="header-avatar">🏃</div>
+      <div>
+        <div class="header-name" id="hdr-name">שלום!</div>
+        <div class="header-class" id="hdr-class">כיתה</div>
+      </div>
+    </div>
+    <div class="header-logo">⚡</div>
+    <div class="header-points" id="hdr-points">0 נקודות</div>
+  </header>
+
+  <div class="app-content">
+    <!-- HOME -->
+    <div id="sec-home" class="section active">
+      <!-- greeting banner -->
+      <div class="personal-greeting" id="personal-greeting">
+        <div class="pg-avatar">🏃</div>
+        <div>
+          <div class="pg-name" id="pg-name">שלום!</div>
+          <div class="pg-sub" id="pg-sub">בואו נתחיל לאמן היום 💪</div>
+        </div>
+      </div>
+
+      <div class="motivation-banner">
+        <div class="m-icon">🌟</div>
+        <p id="daily-motivation">כל יום הוא הזדמנות חדשה להיות גרסה טובה יותר של עצמך!</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">🔥</div>
+          <div class="stat-value" id="stat-workouts">0</div>
+          <div class="stat-label">אימונים השבוע</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⏱️</div>
+          <div class="stat-value" id="stat-minutes">0</div>
+          <div class="stat-label">דקות אימון</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🏆</div>
+          <div class="stat-value" id="stat-streak">0</div>
+          <div class="stat-label">ימי רצף</div>
+        </div>
+        <div class="stat-card" style="cursor:pointer" onclick="addWater()">
+          <div class="stat-icon">💧</div>
+          <div class="stat-value" id="stat-water">0</div>
+          <div class="stat-label">כוסות מים <span style="font-size:9px;display:block;color:var(--primary)">לחץ להוסיף</span></div>
+          <div id="water-cups" style="display:flex;justify-content:center;flex-wrap:wrap;gap:2px;margin-top:4px"></div>
+        </div>
+      </div>
+
+      <div class="bmi-card" id="bmi-card" style="display:none">
+        <h3>מדד BMI שלך</h3>
+        <div class="bmi-value" id="bmi-val">-</div>
+        <div class="bmi-status" id="bmi-status">-</div>
+        <div class="bmi-bar"><div class="bmi-bar-fill" id="bmi-bar" style="width:0%"></div></div>
+      </div>
+
+      <div class="quick-start-title">🎯 הגיע הזמן להזיע!</div>
+      <div class="quick-grid">
+        <div class="quick-card strength" onclick="goToWorkout('strength')">
+          <div class="q-icon">💪</div>
+          <div class="q-title">אימון כוח</div>
+          <div class="q-sub">חיזוק שרירים</div>
+        </div>
+        <div class="quick-card cardio" onclick="goToWorkout('cardio')">
+          <div class="q-icon">🏃</div>
+          <div class="q-title">אימון אירובי</div>
+          <div class="q-sub">סיבולת לב-ריאה</div>
+        </div>
+        <div class="quick-card nutrition" onclick="goSection('nutrition')">
+          <div class="q-icon">🥗</div>
+          <div class="q-title">תזונה נכונה</div>
+          <div class="q-sub">תפריט מומלץ</div>
+        </div>
+        <div class="quick-card ask" onclick="goSection('ask')">
+          <div class="q-icon">💬</div>
+          <div class="q-title">שאל את אורית</div>
+          <div class="q-sub">שאלות ותשובות</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WORKOUTS -->
+    <div id="sec-workouts" class="section">
+      <div class="section-title">🏋️ אימונים</div>
+
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchWorkoutTab(this,'strength')">💪 כוח</button>
+        <button class="tab-btn" onclick="switchWorkoutTab(this,'cardio')">🏃 אירובי</button>
+        <button class="tab-btn" onclick="switchWorkoutTab(this,'flexibility')">🧘 גמישות</button>
+      </div>
+
+      <div class="difficulty-filter">
+        <button class="diff-btn easy active" onclick="filterDiff(this,'easy')">🟢 קל</button>
+        <button class="diff-btn medium" onclick="filterDiff(this,'medium')">🟡 בינוני</button>
+        <button class="diff-btn hard" onclick="filterDiff(this,'hard')">🔴 קשה</button>
+      </div>
+
+      <div id="workout-list"></div>
+    </div>
+
+    <!-- NUTRITION -->
+    <div id="sec-nutrition" class="section">
+      <div class="section-title">🥗 תזונה</div>
+
+      <div class="nutrition-hero">
+        <h2>🌱 אוכלים נכון, חיים טוב!</h2>
+        <p>תפריט שבועי מאוזן לספורטאים צעירים</p>
+      </div>
+
+      <div class="water-reminder">
+        <div class="water-icon">💧</div>
+        <div class="water-text">
+          <h4>שתו מים!</h4>
+          <p>לפחות 8 כוסות ביום, יותר בימי אימון</p>
+        </div>
+      </div>
+
+      <div id="nutrition-personal-card" style="display:none;background:linear-gradient(135deg,var(--primary-dark),var(--primary));border-radius:var(--radius);padding:20px;color:white;margin-bottom:16px;">
+        <div style="font-size:13px;opacity:0.8;margin-bottom:4px;">📊 תזונה מותאמת אישית עבורך</div>
+        <div id="nutrition-name" style="font-size:18px;font-weight:800;margin-bottom:2px;"></div>
+        <div id="nutrition-summary" style="font-size:12px;opacity:0.85;"></div>
+      </div>
+
+      <div class="calorie-chart">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+          <h3 style="margin:0;">📊 חלוקת מרכיבי תזונה מומלצת</h3>
+          <span id="nutrition-basis" style="font-size:10px;color:var(--text-light);max-width:120px;text-align:left;"></span>
+        </div>
+
+        <div class="macro-bar">
+          <div class="macro-label">
+            <span>🥩 חלבון</span>
+            <span id="macro-protein-pct">25%</span>
+          </div>
+          <div class="macro-track"><div class="macro-fill protein" id="macro-protein-bar" style="width:25%"></div></div>
+          <div id="macro-protein-grams" style="font-size:11px;color:var(--text-light);margin-top:3px;"></div>
+        </div>
+
+        <div class="macro-bar">
+          <div class="macro-label">
+            <span>🍞 פחמימות</span>
+            <span id="macro-carbs-pct">50%</span>
+          </div>
+          <div class="macro-track"><div class="macro-fill carbs" id="macro-carbs-bar" style="width:50%"></div></div>
+          <div id="macro-carbs-grams" style="font-size:11px;color:var(--text-light);margin-top:3px;"></div>
+        </div>
+
+        <div class="macro-bar">
+          <div class="macro-label">
+            <span>🥑 שומנים בריאים</span>
+            <span id="macro-fat-pct">25%</span>
+          </div>
+          <div class="macro-track"><div class="macro-fill fat" id="macro-fat-bar" style="width:25%"></div></div>
+          <div id="macro-fat-grams" style="font-size:11px;color:var(--text-light);margin-top:3px;"></div>
+        </div>
+
+        <div id="macro-calories-summary" style="margin-top:14px;padding:10px 14px;background:var(--bg);border-radius:var(--radius-sm);font-size:13px;color:var(--text);"></div>
+
+        <div id="macro-tip" style="margin-top:10px;padding:10px 14px;background:linear-gradient(135deg,#FFF8E1,#FFF3CD);border-radius:var(--radius-sm);border-right:4px solid var(--accent);font-size:12px;color:#7B4F00;"></div>
+      </div>
+
+      <div class="meal-day">
+        <h3>☀️ יום ראשון – אימון כוח</h3>
+        <div class="meal"><div class="meal-time">🌅 ארוחת בוקר 7:00</div><div class="meal-name">שיבולת שועל עם פירות</div><div class="meal-desc">גביע שיבולת שועל + בננה + כף דבש + חלב</div><div class="meal-calories">~350 קלוריות</div></div>
+        <div class="meal"><div class="meal-time">🌤 ביניים 10:00</div><div class="meal-name">יוגורט עם אגוזים</div><div class="meal-desc">גביע יוגורט 3% + חופן אגוזים מעורבים</div><div class="meal-calories">~220 קלוריות</div></div>
+        <div class="meal"><div class="meal-time">☀️ צהריים 13:00</div><div class="meal-name">חזה עוף עם אורז ושלוש ירקות</div><div class="meal-desc">150 גרם חזה עוף + אורז מלא + ברוקולי, גזר, קישוא</div><div class="meal-calories">~520 קלוריות</div></div>
+        <div class="meal"><div class="meal-time">🌆 טרום אימון 16:00</div><div class="meal-name">פרי + פרוסת לחם</div><div class="meal-desc">תפוח + פרוסת לחם מחיטה מלאה עם חמאת בוטנים</div><div class="meal-calories">~200 קלוריות</div></div>
+        <div class="meal"><div class="meal-time">🌙 ערב 19:00</div><div class="meal-name">ביצים + ירקות + גבינה</div><div class="meal-desc">חביתת 3 ביצים + סלט ירקות + גבינה 5%</div><div class="meal-calories">~380 קלוריות</div></div>
+        <div class="rest-day-tip"><p>💡 <strong>טיפ לאחר אימון:</strong> אכול חלבון תוך 30 דקות מסיום האימון לשיקום שרירים!</p></div>
+      </div>
+
+      <div class="meal-day">
+        <h3>🌊 יום שני – אימון אירובי</h3>
+        <div class="meal"><div class="meal-time">🌅 ארוחת בוקר</div><div class="meal-name">טוסט אבוקדו עם ביצה</div><div class="meal-desc">2 פרוסות לחם + חצי אבוקדו + ביצה קשה + עגבנייה</div><div class="meal-calories">~400 קלוריות</div></div>
+        <div class="meal"><div class="meal-time">☀️ צהריים</div><div class="meal-name">סלמון עם תפוחי אדמה מתוקים</div><div class="meal-desc">150 גרם סלמון אפוי + בטטה קטנה + סלט ירוק</div><div class="meal-calories">~480 קלוריות</div></div>
+        <div class="meal"><div class="meal-time">🌙 ערב</div><div class="meal-name">מרק ירקות עם לחם</div><div class="meal-desc">קערה גדולה מרק ירקות ביתי + 2 פרוסות לחם מחיטה מלאה</div><div class="meal-calories">~320 קלוריות</div></div>
+        <div class="rest-day-tip"><p>💡 <strong>לאימון אירובי:</strong> הימנע מאכילה כבדה שעתיים לפני האימון!</p></div>
+      </div>
+
+      <div class="meal-day">
+        <h3>😴 יום שלישי – יום מנוחה</h3>
+        <div class="meal"><div class="meal-time">🌅 בוקר</div><div class="meal-name">פנקייק בריא מאפס</div><div class="meal-desc">2 ביצים + בננה + כפית אבקת אפייה – מחיתה ומטגנים</div><div class="meal-calories">~300 קלוריות</div></div>
+        <div class="meal"><div class="meal-time">☀️ צהריים</div><div class="meal-name">פסטה מחיטה מלאה עם טונה</div><div class="meal-desc">פסטה + פחית טונה + עגבנייה + שמן זית + בזיליקום</div><div class="meal-calories">~450 קלוריות</div></div>
+        <div class="meal"><div class="meal-time">🌙 ערב</div><div class="meal-name">ממרחים על לחם + סלט</div><div class="meal-desc">חומוס + גבינת עמק + ירקות חתוכים + לחם</div><div class="meal-calories">~350 קלוריות</div></div>
+        <div class="rest-day-tip"><p>💧 <strong>ביום מנוחה:</strong> שתו הרבה מים ואכלו קצת פחות פחמימות – הגוף נח!</p></div>
+      </div>
+    </div>
+
+    <!-- PROGRESS -->
+    <div id="sec-progress" class="section">
+      <div class="section-title">📈 התקדמות</div>
+
+      <div class="progress-header">
+        <h2>🏆 ההישגים שלי</h2>
+        <p>כל צעד קדימה הוא ניצחון!</p>
+      </div>
+
+      <div class="weekly-log">
+        <h3>📅 פעילות השבוע</h3>
+        <div class="week-days">
+          <div class="day-dot done"><span>א'</span><span class="day-name">✓</span></div>
+          <div class="day-dot done"><span>ב'</span><span class="day-name">✓</span></div>
+          <div class="day-dot empty"><span>ג'</span><span class="day-name">-</span></div>
+          <div class="day-dot done"><span>ד'</span><span class="day-name">✓</span></div>
+          <div class="day-dot today"><span>ה'</span><span class="day-name">היום</span></div>
+          <div class="day-dot empty"><span>ו'</span><span class="day-name">-</span></div>
+          <div class="day-dot empty"><span>ש'</span><span class="day-name">-</span></div>
+        </div>
+      </div>
+
+      <div class="achievements">
+        <div class="achievement-card">
+          <div class="achievement-icon">🔥</div>
+          <div class="achievement-title">שבוע ראשון!</div>
+          <div class="achievement-desc">השלמת 3 אימונים</div>
+        </div>
+        <div class="achievement-card locked">
+          <div class="achievement-icon">⭐</div>
+          <div class="achievement-title">שבועיים רצוף</div>
+          <div class="achievement-desc">עוד מעט!</div>
+        </div>
+        <div class="achievement-card locked">
+          <div class="achievement-icon">🏅</div>
+          <div class="achievement-title">10 אימונים</div>
+          <div class="achievement-desc">כמעט שם!</div>
+        </div>
+        <div class="achievement-card locked">
+          <div class="achievement-icon">👑</div>
+          <div class="achievement-title">חודש שלם</div>
+          <div class="achievement-desc">המטרה הגדולה</div>
+        </div>
+      </div>
+
+      <div class="workout-card">
+        <div class="workout-card-header">
+          <div class="workout-icon-wrap" style="background:#FFF3E0">📊</div>
+          <div class="workout-info">
+            <div class="workout-name">רשום אימון חדש</div>
+            <div class="workout-meta">עדכן את ההתקדמות שלך</div>
+          </div>
+        </div>
+        <div style="padding:0 18px 18px">
+          <div class="form-row">
+            <div class="form-group">
+              <label>סוג אימון</label>
+              <select id="log-type" style="font-size:13px">
+                <option>כוח</option><option>אירובי</option><option>גמישות</option><option>משחק</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>דקות</label>
+              <input type="number" id="log-mins" placeholder="30" min="5" max="180" />
+            </div>
+          </div>
+          <button class="btn-primary" onclick="logWorkout()" style="padding:10px">✅ שמור אימון</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ASK -->
+    <div id="sec-ask" class="section">
+      <div class="section-title">💬 שאל את אורית AI</div>
+
+      <div class="ask-header">
+        <h2>🤖 עוזרת חכמה</h2>
+        <p>שאל כל שאלה על כושר, תזונה ובריאות!</p>
+      </div>
+
+      <div class="quick-questions">
+        <h4>שאלות נפוצות:</h4>
+        <div class="quick-q-grid">
+          <button class="quick-q-btn" onclick="askQuestion('כמה פעמים בשבוע כדאי להתאמן?')">כמה לאמן בשבוע?</button>
+          <button class="quick-q-btn" onclick="askQuestion('מה לאכול לפני אימון?')">לפני אימון?</button>
+          <button class="quick-q-btn" onclick="askQuestion('איך מחזקים שרירי בטן?')">שרירי בטן</button>
+          <button class="quick-q-btn" onclick="askQuestion('מה זה BMI ואיך מחשבים?')">מה זה BMI?</button>
+          <button class="quick-q-btn" onclick="askQuestion('כמה מים לשתות ביום?')">כמה מים לשתות?</button>
+          <button class="quick-q-btn" onclick="askQuestion('איך להתחיל לרוץ?')">להתחיל לרוץ</button>
+        </div>
+      </div>
+
+      <div class="chat-container" id="chat-box">
+        <div class="msg ai">
+          <div class="msg-sender">🏋️ אורית AI</div>
+          שלום! אני כאן לעזור לך בכל שאלה על כושר, תזונה ובריאות. מה תרצה לדעת? 😊
+        </div>
+      </div>
+
+      <div class="ask-input-area">
+        <input type="text" class="ask-input" id="ask-input" placeholder="שאל/י כל שאלה על כושר ותזונה..." maxlength="500" onkeydown="if(event.key==='Enter' && !event.shiftKey)sendQuestion()" />
+        <button class="ask-send-btn" id="ask-send-btn" onclick="sendQuestion()">📤</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Nav -->
+  <nav class="app-nav">
+    <button class="nav-btn active" onclick="goSection('home',this)">
+      <span class="icon">🏠</span><span class="label">בית</span>
+    </button>
+    <button class="nav-btn" onclick="goSection('workouts',this)">
+      <span class="icon">🏋️</span><span class="label">אימונים</span>
+    </button>
+    <button class="nav-btn" onclick="goSection('nutrition',this)">
+      <span class="icon">🥗</span><span class="label">תזונה</span>
+    </button>
+    <button class="nav-btn" onclick="goSection('progress',this)">
+      <span class="icon">📈</span><span class="label">התקדמות</span>
+    </button>
+    <button class="nav-btn" onclick="goSection('ask',this)">
+      <span class="icon">💬</span><span class="label">שאל</span>
+    </button>
+  </nav>
+</div>
+
+<!-- Guided Workout Modal -->
+<div class="guided-overlay" id="guided-overlay">
+  <div class="guided-modal">
+    <!-- Header -->
+    <div class="guided-header">
+      <div class="guided-progress-wrap">
+        <div class="guided-progress-bar" id="guided-progress-bar"></div>
+      </div>
+      <div class="guided-header-row">
+        <div>
+          <div class="guided-workout-name" id="guided-workout-name">אימון</div>
+          <div class="guided-step-label" id="guided-step-label">תרגיל 1 מתוך 6 | סט 1/3</div>
+        </div>
+        <button class="guided-close-btn" onclick="stopGuidedWorkout()">✕</button>
+      </div>
+    </div>
+
+    <!-- Phase display -->
+    <div class="guided-phase-banner" id="guided-phase-banner">
+      <div class="guided-phase-icon" id="guided-phase-icon">💪</div>
+      <div class="guided-phase-text" id="guided-phase-text">התכונן!</div>
+    </div>
+
+    <!-- Exercise card -->
+    <div class="guided-exercise-card" id="guided-exercise-card">
+      <div class="guided-ex-icon" id="guided-ex-icon">🦵</div>
+      <div class="guided-ex-name" id="guided-ex-name">סקוואט</div>
+      <div class="guided-ex-reps" id="guided-ex-reps">12 חזרות</div>
+      <div class="guided-ex-tip" id="guided-ex-tip">ברכיים לא חורגות</div>
+    </div>
+
+    <!-- Timer circle -->
+    <div class="guided-timer-wrap">
+      <svg class="guided-timer-svg" viewBox="0 0 120 120">
+        <circle cx="60" cy="60" r="52" fill="none" stroke="#E8EDF2" stroke-width="8"/>
+        <circle cx="60" cy="60" r="52" fill="none" stroke="var(--primary)" stroke-width="8"
+          stroke-dasharray="326.7" stroke-dashoffset="0" stroke-linecap="round"
+          id="guided-timer-circle" transform="rotate(-90 60 60)"/>
+      </svg>
+      <div class="guided-timer-inner">
+        <div class="guided-timer-num" id="guided-timer-num">3</div>
+        <div class="guided-timer-label" id="guided-timer-label">שניות</div>
+      </div>
+    </div>
+
+    <!-- Next exercise preview -->
+    <div class="guided-next" id="guided-next">
+      <span style="font-size:12px;color:var(--text-light);">הבא:</span>
+      <span id="guided-next-text" style="font-size:13px;font-weight:700;color:var(--text);margin-right:4px;"></span>
+    </div>
+
+    <!-- Controls -->
+    <div class="guided-controls">
+      <button class="guided-ctrl-btn skip" onclick="guidedSkip()">⏭ דלג</button>
+      <button class="guided-ctrl-btn pause" id="guided-pause-btn" onclick="guidedPause()">⏸ השהה</button>
+    </div>
+  </div>
+</div>
+
+<!-- Celebration Modal -->
+<div class="celebration-overlay" id="celebration-overlay" onclick="closeCelebration()">
+  <div class="celebration-box" onclick="event.stopPropagation()">
+    <div class="celebration-emoji" id="cel-emoji">🎉</div>
+    <div class="celebration-title" id="cel-title">כל הכבוד!</div>
+    <div class="celebration-sub" id="cel-sub">סיימת אימון מדהים!</div>
+    <div class="celebration-points" id="cel-points">+10 נקודות 🏆</div>
+    <button class="celebration-btn" onclick="closeCelebration()">💪 המשך להתאמן!</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== DATA =====
+let userData = {};
+let points = 0;
+let workoutsThisWeek = 0;
+let totalMinutes = 0;
+let currentTab = 'strength';
+let currentDiff = 'easy';
+let timerIntervals = {};
+let timerSeconds = {};
+let timerRunning = {};
+let currentSets = {};
+let currentReps = {};
+
+// ===== LOCAL STORAGE – זיכרון מקומי =====
+function saveToLocal() {
+  const data = {
+    userData,
+    points,
+    workoutsThisWeek,
+    totalMinutes,
+    waterCount,
+    savedDate: new Date().toDateString()
+  };
+  try { localStorage.setItem('orit_fitness_user', JSON.stringify(data)); } catch(e) {}
+}
+
+function loadFromLocal() {
+  try {
+    const raw = localStorage.getItem('orit_fitness_user');
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    // אפס סטטיסטיקות שבועיות אם שבוע חדש
+    const today = new Date();
+    const saved = new Date(data.savedDate);
+    const daysDiff = Math.floor((today - saved) / (1000*60*60*24));
+    if (daysDiff >= 7) { data.workoutsThisWeek = 0; data.totalMinutes = 0; }
+    // אפס מים כל יום
+    if (today.toDateString() !== data.savedDate) data.waterCount = 0;
+    return data;
+  } catch(e) { return null; }
+}
+
+function clearLocal() {
+  try { localStorage.removeItem('orit_fitness_user'); } catch(e) {}
+  location.reload();
+}
+
+// ===== בדוק כניסה קודמת בטעינה =====
+window.addEventListener('load', () => {
+  const saved = loadFromLocal();
+  if (saved && saved.userData && saved.userData.name) {
+    // משתמש מוכר – כנס אוטומטית
+    userData = saved.userData;
+    points = saved.points || 0;
+    workoutsThisWeek = saved.workoutsThisWeek || 0;
+    totalMinutes = saved.totalMinutes || 0;
+    waterCount = saved.waterCount || 0;
+    autoLogin();
+  }
+});
+
+function autoLogin() {
+  // מלא את שדות הטופס (למקרה שחוזרים)
+  if (document.getElementById('inp-name')) document.getElementById('inp-name').value = userData.name || '';
+  if (document.getElementById('inp-class')) document.getElementById('inp-class').value = userData.cls || '';
+  if (document.getElementById('inp-age')) document.getElementById('inp-age').value = userData.age || '';
+  if (document.getElementById('inp-height')) document.getElementById('inp-height').value = userData.height || '';
+  if (document.getElementById('inp-weight')) document.getElementById('inp-weight').value = userData.weight || '';
+  if (document.getElementById('inp-fitness')) document.getElementById('inp-fitness').value = userData.fitness || '';
+  if (document.getElementById('inp-goal')) document.getElementById('inp-goal').value = userData.goal || '';
+
+  // עבור ישירות לאפליקציה
+  document.getElementById('screen-welcome').classList.remove('active');
+  document.getElementById('screen-app').classList.add('active');
+
+  const { name, cls, goal, height, weight, age } = userData;
+  document.getElementById('hdr-name').textContent = `טוב שבאת, ${name}! 🙌`;
+  document.getElementById('hdr-class').textContent = cls || '';
+  document.getElementById('hdr-points').textContent = points + ' נקודות';
+  document.getElementById('stat-workouts').textContent = workoutsThisWeek;
+  document.getElementById('stat-minutes').textContent = totalMinutes;
+  document.getElementById('stat-streak').textContent = workoutsThisWeek;
+
+  const hour = new Date().getHours();
+  const greet = hour < 12 ? 'בוקר טוב' : hour < 17 ? 'צהריים טובים' : 'ערב טוב';
+  const goalTexts = { 'ירידה במשקל':'נשרוף היום 🔥', 'בניית שריר':'נבנה שריר 💪', 'שיפור כושר':'נשפר כושר 🏃', 'גמישות':'נתמתח ונשתפר 🧘', 'ספורט':'נשתפר בביצועים ⚡', 'בריאות כללית':'נשמור על הבריאות 🌿', 'הרזיה לאחר לידה':'נחזור לכושר 💫', 'כושר גיל הזהב':'נישאר חזקים ובריאים 🌟' };
+  document.getElementById('pg-name').textContent = `${greet}, ${name}! 👋`;
+  document.getElementById('pg-sub').textContent = goalTexts[goal] || 'בואו נתחיל לאמן היום 💪';
+
+  if (height && weight) {
+    const bmi = (weight / ((height/100)**2)).toFixed(1);
+    let bmiStatus='', bmiPct=0;
+    if (bmi < 18.5) { bmiStatus='⚠️ תת משקל'; bmiPct=20; }
+    else if (bmi < 25) { bmiStatus='✅ משקל תקין – מצוין!'; bmiPct=50; }
+    else if (bmi < 30) { bmiStatus='⚡ עודף משקל קל'; bmiPct=70; }
+    else { bmiStatus='⚠️ השמנה – דבר עם הרופא'; bmiPct=90; }
+    document.getElementById('bmi-val').textContent = bmi;
+    document.getElementById('bmi-status').textContent = bmiStatus;
+    document.getElementById('bmi-bar').style.width = bmiPct + '%';
+    document.getElementById('bmi-card').style.display = 'block';
+  }
+
+  const mi = Math.floor(Math.random() * motivations.length);
+  document.getElementById('daily-motivation').textContent = motivations[mi];
+
+  renderWorkouts();
+  renderWaterCups();
+  calculateMacros();
+  updateAchievements();
+
+  // הצג כפתור "החלף משתמש" בהדר
+  showSwitchUserBtn();
+}
+
+const motivations = [
+  "כל יום הוא הזדמנות חדשה להיות גרסה טובה יותר של עצמך! 💪",
+  "הגוף משיג מה שהמוח מאמין! 🧠✨",
+  "אל תספור את הימים – גרום לימים לספור! 🏆",
+  "חוזק לא מגיע מנוחות – הוא מגיע מהתגברות על אתגרים! 🔥",
+  "כל אימון מקרב אותך למטרה שלך! 🎯",
+  "הדרך הטובה ביותר להתחיל היא להפסיק לדבר ולהתחיל לפעול! ⚡",
+  "אל תסתכל כמה רחוק יש ללכת – תסתכל כמה רחוק הגעת! 🌟"
+];
+
+const workouts = {
+  strength: {
+    easy: [
+      { id:'s1', name:"סקוואט עם משקל גוף", icon:"🦵", color:"#FFE0D0", colorText:"#7B3D2A", sets:3, rest:60, isFullWorkout:true, totalTime:"20 דקות", music:{title:"Energy Boost Mix",artist:"Workout Playlist"}, video:"squats beginners",
+        fullExercises:[
+          { name:"סקוואט", icon:"🦵", reps:{easy:10, medium:14, hard:18}, unit:"חזרות", tip:"ברכיים לא חורגות מעבר לאצבעות" },
+          { name:"פלאנק", icon:"🧱", reps:{easy:20, medium:30, hard:45}, unit:"שניות", tip:"גוף ישר, אל תרים ישבן" },
+          { name:"גשר אגן", icon:"🌉", reps:{easy:12, medium:16, hard:22}, unit:"חזרות", tip:"הרם ישבן ועצור 2 שניות" },
+          { name:"לאנג׳ קדמי", icon:"🏃", reps:{easy:8, medium:12, hard:16}, unit:"כל רגל", tip:"ברך אחורית כמעט בקרקע" },
+          { name:"צעד הצד (Lateral Lunge)", icon:"↔️", reps:{easy:8, medium:12, hard:16}, unit:"כל רגל", tip:"שמור גב ישר, פסע רחב" }
+        ]
+      },
+      { id:'s2', name:"שכיבות סמיכה", icon:"💪", color:"#D0EAF5", colorText:"#1B5E7A", sets:3, rest:60, isFullWorkout:true, totalTime:"20 דקות", music:{title:"Power Up!",artist:"Fitness Beats"}, video:"push ups beginners",
+        fullExercises:[
+          { name:"שכיבות סמיכה על ברכיים", icon:"💪", reps:{easy:8, medium:12, hard:15}, unit:"חזרות", tip:"גוף ישר מהברכיים לראש" },
+          { name:"ציר כתפיים (Shoulder Tap)", icon:"🙌", reps:{easy:8, medium:12, hard:16}, unit:"כל יד", tip:"ממצב פלאנק – גע כתף בידי השנייה" },
+          { name:"פלאנק על מרפקים", icon:"🧱", reps:{easy:25, medium:40, hard:55}, unit:"שניות", tip:"מרפקים ישר מתחת לכתפיים" },
+          { name:"שכיבות סמיכה רחבות", icon:"🤲", reps:{easy:6, medium:10, hard:14}, unit:"חזרות", tip:"ידיים רחבות יותר מהכתפיים" },
+          { name:"הורדת כתפיים (Pike Push-up)", icon:"⬆️", reps:{easy:6, medium:9, hard:12}, unit:"חזרות", tip:"ישבן גבוה, הורד ראש לרצפה" }
+        ]
+      },
+      { id:'s_full_easy', name:"🌟 אימון כוח שלם – קל", icon:"💪", color:"#FFE0D0", colorText:"#7B3D2A", sets:3, rest:60, isFullWorkout:true, totalTime:"30 דקות", music:{title:"Strength Training Mix",artist:"Power Gym"}, video:"full body strength workout beginners",
+        fullExercises:[
+          { name:"סקוואט משקל גוף", icon:"🦵", reps:{easy:10, medium:15, hard:20}, unit:"חזרות", tip:"ברכיים לא חורגות מעבר לאצבעות הרגל" },
+          { name:"שכיבות סמיכה על הברכיים", icon:"💪", reps:{easy:8, medium:12, hard:15}, unit:"חזרות", tip:"גוף ישר מהברכיים לראש" },
+          { name:"לאנג׳ קדמי", icon:"🏃", reps:{easy:8, medium:12, hard:15}, unit:"כל רגל", tip:"ברך אחורית כמעט נוגעת בקרקע" },
+          { name:"פלאנק", icon:"🧱", reps:{easy:20, medium:35, hard:50}, unit:"שניות", tip:"גוף ישר כמו קרש, אל תרים ישבן" },
+          { name:"גשר אגן (Glute Bridge)", icon:"🌉", reps:{easy:12, medium:18, hard:25}, unit:"חזרות", tip:"הרם ישבן ושמור 2 שניות למעלה" },
+          { name:"ציר כתפיים (Shoulder Tap)", icon:"🙌", reps:{easy:8, medium:12, hard:16}, unit:"כל יד", tip:"ממצב פלאנק – גע כתף בידי השנייה" }
+        ]
+      }
+    ],
+    medium: [
+      { id:'s4', name:"בורפי", icon:"⚡", color:"#FFF3E0", colorText:"#E65100", sets:3, rest:90, isFullWorkout:true, totalTime:"25 דקות", music:{title:"High Intensity Mix",artist:"CrossFit Beats"}, video:"burpees workout",
+        fullExercises:[
+          { name:"בורפי", icon:"💥", reps:{easy:6, medium:10, hard:14}, unit:"חזרות", tip:"קפיצה לגובה בסוף כל חזרה" },
+          { name:"סקוואט קפיצה", icon:"🦘", reps:{easy:8, medium:12, hard:18}, unit:"חזרות", tip:"כרע עמוק, קפוץ בעוצמה" },
+          { name:"שכיבות סמיכה מלאות", icon:"💪", reps:{easy:8, medium:12, hard:16}, unit:"חזרות", tip:"חזה נוגע ברצפה" },
+          { name:"Mountain Climbers", icon:"🧗", reps:{easy:16, medium:24, hard:32}, unit:"כל רגל", tip:"ירכיים נמוכות, קצב גבוה" },
+          { name:"לאנג׳ קפיצה חלופי", icon:"🔥", reps:{easy:8, medium:12, hard:16}, unit:"כל רגל", tip:"קפוץ בין ימין לשמאל" }
+        ]
+      },
+      { id:'s5', name:"מתח מסייע", icon:"🏋️", color:"#FCE4EC", colorText:"#C62828", sets:3, rest:90, isFullWorkout:true, totalTime:"28 דקות", music:{title:"Beast Mode",artist:"Workout Nation"}, video:"pull up assisted beginner",
+        fullExercises:[
+          { name:"מתח (Pull-up) מסייע", icon:"🏋️", reps:{easy:4, medium:6, hard:10}, unit:"חזרות", tip:"השתמש בגומייה לסיוע" },
+          { name:"שכיבות סמיכה צרות (Tricep)", icon:"💪", reps:{easy:8, medium:12, hard:16}, unit:"חזרות", tip:"מרפקים צמודים לגוף" },
+          { name:"פלאנק + הרמת יד", icon:"🧱", reps:{easy:6, medium:10, hard:14}, unit:"כל יד", tip:"מינימום תנודה לצדדים" },
+          { name:"Superman", icon:"🦸", reps:{easy:10, medium:15, hard:20}, unit:"חזרות", tip:"הרם ידיים ורגליים יחד מהבטן" },
+          { name:"ברייסינג בטן (Dead Bug)", icon:"🐛", reps:{easy:6, medium:10, hard:14}, unit:"כל צד", tip:"גב ישר בקרקע, הורד יד ורגל לאט" }
+        ]
+      },
+      { id:'s_full_med', name:"🔥 טאבטה כוח – בינוני", icon:"⚡", color:"#FFF3E0", colorText:"#E65100", sets:3, rest:45, isFullWorkout:true, totalTime:"35 דקות", music:{title:"Power Tabata",artist:"CrossFit Nation"}, video:"tabata strength workout intermediate",
+        fullExercises:[
+          { name:"סקוואט קפיצה", icon:"🦘", reps:{easy:8, medium:12, hard:18}, unit:"חזרות", tip:"כרע עמוק וקפוץ בעוצמה" },
+          { name:"שכיבות סמיכה מלאות", icon:"💪", reps:{easy:8, medium:12, hard:18}, unit:"חזרות", tip:"גוף ישר, חזה נוגע ברצפה" },
+          { name:"לאנג׳ קפיצה חלופי", icon:"🔥", reps:{easy:8, medium:12, hard:18}, unit:"כל רגל", tip:"קפוץ בין ימין לשמאל בקצב" },
+          { name:"פלאנק + הרמת יד", icon:"🧱", reps:{easy:6, medium:10, hard:14}, unit:"כל יד", tip:"מתנדנד מינימלי – שמור יציבות" },
+          { name:"Mountain Climbers", icon:"🧗", reps:{easy:15, medium:22, hard:30}, unit:"כל רגל", tip:"קצב גבוה, ירכיים לא עולות" },
+          { name:"Superman", icon:"🦸", reps:{easy:10, medium:15, hard:20}, unit:"חזרות", tip:"שוכב על הבטן, הרם ידיים ורגליים" }
+        ]
+      }
+    ],
+    hard: [
+      { id:'s6', name:"פיסטול סקוואט", icon:"🔥", color:"#FCE4EC", colorText:"#880E4F", sets:3, rest:120, isFullWorkout:true, totalTime:"35 דקות", music:{title:"Ultimate Power",artist:"Elite Athletes Mix"}, video:"pistol squat tutorial",
+        fullExercises:[
+          { name:"פיסטול סקוואט", icon:"🔥", reps:{easy:4, medium:6, hard:10}, unit:"כל רגל", tip:"אחוז בידית לתמיכה בהתחלה" },
+          { name:"שכיבות סמיכה עם מחיאה", icon:"👏", reps:{easy:5, medium:8, hard:12}, unit:"חזרות", tip:"דחיפה חזקה, מחיאה באוויר" },
+          { name:"Nordic Curl", icon:"🧗", reps:{easy:3, medium:5, hard:8}, unit:"חזרות", tip:"ירידה איטית קדימה בכוח ירכיים" },
+          { name:"L-Sit פלאנק", icon:"⚡", reps:{easy:15, medium:25, hard:40}, unit:"שניות", tip:"ישבן צמוד, רגליים מורמות" },
+          { name:"ג׳מפ לאנג׳ + סיבוב 180°", icon:"🌀", reps:{easy:5, medium:8, hard:12}, unit:"כל צד", tip:"סיבוב מלא באוויר" }
+        ]
+      },
+      { id:'s_full_hard', name:"💀 טאבטה כוח – קשה", icon:"🔥", color:"#FCE4EC", colorText:"#880E4F", sets:3, rest:30, isFullWorkout:true, totalTime:"40 דקות", music:{title:"Hardcore Strength",artist:"Beast Mode"}, video:"advanced tabata strength workout",
+        fullExercises:[
+          { name:"פיסטול סקוואט", icon:"🔥", reps:{easy:4, medium:6, hard:10}, unit:"כל רגל", tip:"אחוז בידית לתמיכה בהתחלה" },
+          { name:"שכיבות סמיכה פלצ׳ה", icon:"💀", reps:{easy:5, medium:8, hard:12}, unit:"חזרות", tip:"ידיים צמודות, מרפקים אחורה" },
+          { name:"Nordic Curl", icon:"🧗", reps:{easy:4, medium:6, hard:10}, unit:"חזרות", tip:"ירידה איטית קדימה בכוח ירכיים" },
+          { name:"שכיבות סמיכה עם מחיאת כף", icon:"👏", reps:{easy:6, medium:10, hard:15}, unit:"חזרות", tip:"דחיפה חזקה, מחיאה באוויר" },
+          { name:"ג׳מפ לאנג׳ + סיבוב", icon:"🌀", reps:{easy:6, medium:10, hard:14}, unit:"כל צד", tip:"סיבוב 180° באוויר" },
+          { name:"L-Sit פלאנק", icon:"⚡", reps:{easy:15, medium:25, hard:40}, unit:"שניות", tip:"ישבן צמוד, רגליים מורמות" }
+        ]
+      }
+    ]
+  },
+  cardio: {
+    easy: [
+      { id:'c1', name:"ריצה קלה – 20 דקות", icon:"🏃", color:"#D0EAF5", colorText:"#1B5E7A", sets:3, rest:60, isFullWorkout:true, totalTime:"20 דקות", music:{title:"Running Vibes",artist:"Cardio Playlist"}, video:"easy jogging beginner",
+        fullExercises:[
+          { name:"חימום – הליכה מהירה", icon:"🚶", reps:{easy:60, medium:60, hard:60}, unit:"שניות", tip:"חמם את הגוף לפני הריצה" },
+          { name:"ריצה בקצב נינוח", icon:"🏃", reps:{easy:60, medium:90, hard:120}, unit:"שניות", tip:"קצב שבו אפשר לדבר" },
+          { name:"הליכה מהירה", icon:"⚡", reps:{easy:30, medium:30, hard:30}, unit:"שניות", tip:"נשום ותתאושש" },
+          { name:"ריצה קצת יותר מהיר", icon:"🔥", reps:{easy:45, medium:60, hard:90}, unit:"שניות", tip:"הגבר קצת את הקצב" },
+          { name:"קירור – הליכה ונשימות", icon:"😮‍💨", reps:{easy:60, medium:60, hard:60}, unit:"שניות", tip:"הוריד דופק לאט לאט" }
+        ]
+      },
+      { id:'c2', name:"קפיצה בחבל", icon:"🪂", color:"#D5F0E0", colorText:"#1B5E40", sets:3, rest:45, isFullWorkout:true, totalTime:"15 דקות", music:{title:"Jump Jump!",artist:"Cardio Beats"}, video:"jump rope beginner workout",
+        fullExercises:[
+          { name:"קפיצות חבל – קצב רגיל", icon:"🪂", reps:{easy:30, medium:45, hard:60}, unit:"שניות", tip:"נחת רך על כפות הרגלים" },
+          { name:"קפיצות כוכב (Jumping Jacks)", icon:"⭐", reps:{easy:15, medium:20, hard:30}, unit:"חזרות", tip:"ידיים עד מעל הראש" },
+          { name:"ריצה במקום", icon:"🏃", reps:{easy:20, medium:30, hard:45}, unit:"שניות", tip:"הרם ברכיים לגובה מותן" },
+          { name:"קפיצות חבל – מהיר", icon:"⚡", reps:{easy:20, medium:30, hard:45}, unit:"שניות", tip:"הגבר קצב בהדרגה" },
+          { name:"בעיטות אחורה (Butt Kicks)", icon:"🦵", reps:{easy:20, medium:30, hard:40}, unit:"חזרות", tip:"בעט עקב לכיוון הישבן" }
+        ]
+      },
+      { id:'c_full_easy', name:"🌟 אימון אירובי שלם – קל", icon:"🏃", color:"#D0EAF5", colorText:"#1B5E7A", sets:3, rest:60, isFullWorkout:true, totalTime:"25 דקות", music:{title:"Easy Cardio Mix",artist:"Beginners Playlist"}, video:"full body cardio workout beginners",
+        fullExercises:[
+          { name:"ריצה במקום", icon:"🏃", reps:{easy:30, medium:45, hard:60}, unit:"שניות", tip:"הרם ברכיים לגובה מותן" },
+          { name:"קפיצות כוכב (Jumping Jacks)", icon:"⭐", reps:{easy:15, medium:20, hard:30}, unit:"חזרות", tip:"ידיים עד מעל הראש" },
+          { name:"צעידה גבוהה (High Knees)", icon:"🚶", reps:{easy:20, medium:30, hard:40}, unit:"צעדים", tip:"הרם ברכיים לאט, גב ישר" },
+          { name:"בעיטות אחורה (Butt Kicks)", icon:"🦵", reps:{easy:20, medium:30, hard:40}, unit:"חזרות", tip:"בעט עקב לכיוון הישבן" },
+          { name:"צעדי צד (Side Steps)", icon:"↔️", reps:{easy:10, medium:16, hard:20}, unit:"כל צד", tip:"קפוץ הצידה ואסוף רגלים" },
+          { name:"ריקוד חופשי – סיום", icon:"💃", reps:{easy:30, medium:45, hard:60}, unit:"שניות", tip:"תהנה! זז לפי המוזיקה" }
+        ]
+      }
+    ],
+    medium: [
+      { id:'c3', name:"HIIT – 20 דקות", icon:"⚡", color:"#FFF3E0", colorText:"#E65100", sets:3, rest:20, isFullWorkout:true, totalTime:"20 דקות", music:{title:"HIIT Intensity",artist:"Max Power Mix"}, video:"HIIT workout 20 minutes",
+        fullExercises:[
+          { name:"ריצה במקום עוצמה", icon:"🔥", reps:{easy:20, medium:30, hard:45}, unit:"שניות", tip:"קרסוליים גבוה, קצב מקסימלי" },
+          { name:"בורפי", icon:"💥", reps:{easy:5, medium:8, hard:12}, unit:"חזרות", tip:"קפיצה לגובה בסוף" },
+          { name:"ג׳מפ סקוואט", icon:"🦘", reps:{easy:8, medium:12, hard:18}, unit:"חזרות", tip:"נחת רך על כפות הרגלים" },
+          { name:"Mountain Climbers", icon:"🧗", reps:{easy:16, medium:24, hard:36}, unit:"כל רגל", tip:"קצב גבוה, גב ישר" },
+          { name:"קפיצות צד (Skaters)", icon:"⛸️", reps:{easy:10, medium:16, hard:22}, unit:"כל צד", tip:"חיקוי גולש, קפוץ ורחף" }
+        ]
+      },
+      { id:'c_full_med', name:"🔥 טאבטה אירובי – בינוני", icon:"⚡", color:"#FFF3E0", colorText:"#E65100", sets:3, rest:45, isFullWorkout:true, totalTime:"30 דקות", music:{title:"Tabata Cardio Mix",artist:"HIIT Nation"}, video:"tabata cardio full workout",
+        fullExercises:[
+          { name:"בורפי", icon:"💥", reps:{easy:6, medium:10, hard:15}, unit:"חזרות", tip:"קפיצה לגובה מקסימלי בסוף" },
+          { name:"ג׳מפ סקוואט", icon:"🦘", reps:{easy:10, medium:15, hard:20}, unit:"חזרות", tip:"נחת רך על כפות הרגלים" },
+          { name:"Mountain Climbers", icon:"🧗", reps:{easy:20, medium:30, hard:40}, unit:"רגל כל צד", tip:"קצב מהיר, גב ישר" },
+          { name:"ריצה במקום עוצמה", icon:"🔥", reps:{easy:20, medium:30, hard:45}, unit:"שניות", tip:"קרסוליים גבוה, קצב מקסימלי" },
+          { name:"קפיצות צד (Skaters)", icon:"⛸️", reps:{easy:10, medium:16, hard:22}, unit:"כל צד", tip:"חיקוי גולש, קפוץ ורחף" },
+          { name:"פלאנק קופץ (Plank Jacks)", icon:"⚡", reps:{easy:10, medium:16, hard:24}, unit:"חזרות", tip:"שמור פלאנק יציב, קפוץ ברגלים" }
+        ]
+      }
+    ],
+    hard: [
+      { id:'c5', name:"טאבטה קלאסי – 4 דקות", icon:"🔥", color:"#FCE4EC", colorText:"#880E4F", sets:3, rest:10, isFullWorkout:true, totalTime:"20 דקות", music:{title:"Tabata Beast",artist:"4 Minute Warriors"}, video:"tabata workout 4 minutes",
+        fullExercises:[
+          { name:"ספרינט במקום", icon:"💨", reps:{easy:20, medium:30, hard:45}, unit:"שניות", tip:"עוצמה מקסימלית, קרסוליים גבוה" },
+          { name:"בורפי", icon:"💥", reps:{easy:6, medium:10, hard:14}, unit:"חזרות", tip:"קפיצה גבוהה בסיום" },
+          { name:"ג׳מפ סקוואט", icon:"🦘", reps:{easy:10, medium:15, hard:20}, unit:"חזרות", tip:"כרע עמוק, קפוץ בעוצמה" },
+          { name:"Mountain Climbers מהיר", icon:"🌪️", reps:{easy:20, medium:30, hard:45}, unit:"כל רגל", tip:"כמה שיותר מהיר!" },
+          { name:"Tuck Jumps", icon:"💥", reps:{easy:6, medium:10, hard:15}, unit:"חזרות", tip:"קפוץ ומשוך ברכיים לחזה" }
+        ]
+      },
+      { id:'c_full_hard', name:"💀 טאבטה אירובי – קשה", icon:"🔥", color:"#FCE4EC", colorText:"#880E4F", sets:3, rest:30, isFullWorkout:true, totalTime:"35 דקות", music:{title:"Beast Mode Cardio",artist:"Elite HIIT"}, video:"extreme tabata cardio workout",
+        fullExercises:[
+          { name:"בורפי עם מתח", icon:"💀", reps:{easy:5, medium:8, hard:12}, unit:"חזרות", tip:"קפוץ למוט בסוף הבורפי" },
+          { name:"ג׳מפ לאנג׳ חלופי", icon:"🦘", reps:{easy:10, medium:16, hard:22}, unit:"כל רגל", tip:"קפוץ בין לאנג׳ ימין לשמאל" },
+          { name:"Mountain Climbers מהיר", icon:"🌪️", reps:{easy:20, medium:30, hard:50}, unit:"כל רגל", tip:"כמה שיותר מהיר!" },
+          { name:"Double Jump Squat", icon:"⚡", reps:{easy:8, medium:12, hard:18}, unit:"חזרות", tip:"שני קפיצות ברצף מהסקוואט" },
+          { name:"ספרינט במקום", icon:"🔥", reps:{easy:20, medium:30, hard:45}, unit:"שניות", tip:"עוצמה מקסימלית!" },
+          { name:"Tuck Jumps", icon:"💥", reps:{easy:6, medium:10, hard:15}, unit:"חזרות", tip:"קפוץ ומשוך ברכיים לחזה" }
+        ]
+      }
+    ]
+  },
+  flexibility: {
+    easy: [
+      { id:'f1', name:"סדרת יוגה בסיסית", icon:"🧘", color:"#D5F0E0", colorText:"#1B5E40", sets:3, rest:15, isFullWorkout:true, totalTime:"20 דקות", music:{title:"Zen Flow",artist:"Meditation Music"}, video:"beginner yoga 10 minutes",
+        fullExercises:[
+          { name:"פוזת הילד (Child's Pose)", icon:"🧘", reps:{easy:30, medium:40, hard:60}, unit:"שניות", tip:"נשום עמוק ורפה את הגב" },
+          { name:"חתול-פרה (Cat-Cow)", icon:"🐱", reps:{easy:10, medium:14, hard:18}, unit:"חזרות", tip:"תנועה איטית ומודעת" },
+          { name:"לוחם I (Warrior I)", icon:"⚔️", reps:{easy:25, medium:35, hard:50}, unit:"שניות כל צד", tip:"כפות ידיים מעל הראש, גב ישר" },
+          { name:"ישיבת פרפר (Butterfly)", icon:"🦋", reps:{easy:30, medium:45, hard:60}, unit:"שניות", tip:"לחץ ברכיים קלות לרצפה" },
+          { name:"פיתול שכיבה (Supine Twist)", icon:"🌀", reps:{easy:25, medium:35, hard:45}, unit:"שניות כל צד", tip:"כתפיים בקרקע, ברך לצד" }
+        ]
+      },
+      { id:'f2', name:"מתיחות לאחר ריצה", icon:"🦵", color:"#D0EAF5", colorText:"#1B5E7A", sets:2, rest:10, isFullWorkout:true, totalTime:"12 דקות", music:{title:"Cool Down",artist:"Relaxing Beats"}, video:"post run stretching routine",
+        fullExercises:[
+          { name:"מתיחת ירך קדמית", icon:"🦵", reps:{easy:30, medium:40, hard:50}, unit:"שניות כל רגל", tip:"עמוד על רגל אחת, אחוז קרסול" },
+          { name:"מתיחת שרירי שוק", icon:"🦶", reps:{easy:30, medium:40, hard:50}, unit:"שניות כל רגל", tip:"רגל ישרה מאחור, עקב בקרקע" },
+          { name:"כפיפה קדימה (Forward Fold)", icon:"🙏", reps:{easy:30, medium:45, hard:60}, unit:"שניות", tip:"ברכיים קלות, גב ישר" },
+          { name:"מתיחת כתפיים", icon:"🤲", reps:{easy:20, medium:30, hard:40}, unit:"שניות כל יד", tip:"משוך יד לחזה בעדינות" },
+          { name:"נשימות עמוקות", icon:"😮‍💨", reps:{easy:5, medium:8, hard:10}, unit:"נשימות", tip:"שאפי 4 שניות, נשפי 6 שניות" }
+        ]
+      }
+    ],
+    medium: [
+      { id:'f3', name:"פילאטיס – 20 דקות", icon:"⭐", color:"#EAD5F5", colorText:"#4A1B7A", sets:3, rest:15, isFullWorkout:true, totalTime:"25 דקות", music:{title:"Pilates Flow",artist:"Body Balance"}, video:"pilates beginners 20 minutes",
+        fullExercises:[
+          { name:"גשר אגן (Pelvic Bridge)", icon:"🌉", reps:{easy:12, medium:16, hard:22}, unit:"חזרות", tip:"הרם לאט, ירד לאט" },
+          { name:"הזזת רגל שוכבת (Leg Raise)", icon:"🦵", reps:{easy:8, medium:12, hard:16}, unit:"כל צד", tip:"גב ישר בקרקע, ירד לאט" },
+          { name:"גלגל קדימה (Roll Up)", icon:"🔄", reps:{easy:6, medium:10, hard:14}, unit:"חזרות", tip:"ידיים קדימה, עלה לאט חוליה חוליה" },
+          { name:"שחייה על הבטן (Swimming)", icon:"🏊", reps:{easy:20, medium:30, hard:40}, unit:"שניות", tip:"הרם ידיים ורגליים לסירוגין" },
+          { name:"קישוט (The Saw)", icon:"✂️", reps:{easy:5, medium:8, hard:10}, unit:"כל צד", tip:"פיתול מהמותן, לא מהכתפיים" }
+        ]
+      }
+    ],
+    hard: [
+      { id:'f4', name:"גמישות מתקדמת – ספליט", icon:"🌟", color:"#FCE4EC", colorText:"#880E4F", sets:3, rest:20, isFullWorkout:true, totalTime:"35 דקות", music:{title:"Deep Stretch",artist:"Yoga Masters"}, video:"full split training flexibility",
+        fullExercises:[
+          { name:"מתיחות דינמיות", icon:"🌀", reps:{easy:60, medium:60, hard:60}, unit:"שניות", tip:"תנועות קטנות ומבוקרות" },
+          { name:"מתיחת ירך עמוקה (Hip Flexor)", icon:"🦵", reps:{easy:45, medium:60, hard:90}, unit:"שניות כל צד", tip:"ברך אחורית בקרקע, הישאר נמוך" },
+          { name:"ספליט צדדי חצי", icon:"🌟", reps:{easy:30, medium:45, hard:60}, unit:"שניות", tip:"רגליים פתוחות, גב ישר" },
+          { name:"ספליט קדמי עם תמיכה", icon:"✨", reps:{easy:30, medium:45, hard:60}, unit:"שניות כל רגל", tip:"ידיים בקרקע לתמיכה" },
+          { name:"גשר (Wheel Pose)", icon:"🌈", reps:{easy:15, medium:25, hard:40}, unit:"שניות", tip:"דחף דרך הידיים, פתח חזה" }
+        ]
+      }
+    ]
+  }
+};
+
+// ===== INIT =====
+let waterCount = 0;
+const completedWorkoutIds = new Set();
+
+function startApp() {
+  const name = document.getElementById('inp-name').value.trim();
+  const cls = document.getElementById('inp-class').value.trim();
+  const age = document.getElementById('inp-age').value;
+  const height = parseFloat(document.getElementById('inp-height').value);
+  const weight = parseFloat(document.getElementById('inp-weight').value);
+  const fitness = document.getElementById('inp-fitness').value;
+  const goal = document.getElementById('inp-goal').value;
+
+  // Reset all field styles
+  ['inp-name','inp-class','inp-age','inp-height','inp-weight','inp-fitness','inp-goal'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.style.borderColor = ''; el.style.background = ''; }
+  });
+
+  // Validate each field
+  const errors = [];
+  const markError = id => {
+    const el = document.getElementById(id);
+    if (el) { el.style.borderColor = '#E53935'; el.style.background = '#FFF5F5'; }
+  };
+
+  const namePattern = /^[֐-׿‏‎a-zA-Z\s\-'.]{2,50}$/;
+  if (!name) { errors.push('שם מלא'); markError('inp-name'); }
+  else if (!namePattern.test(name)) { errors.push('שם מלא – תווים לא תקינים'); markError('inp-name'); }
+  if (!cls)  { errors.push('קבוצה / כיתה'); markError('inp-class'); }
+  const ageNum = parseInt(age);
+  if (!age || isNaN(ageNum) || ageNum < 5 || ageNum > 99) { errors.push('גיל (5-99)'); markError('inp-age'); }
+  if (!height || isNaN(height) || height < 100 || height > 230) { errors.push('גובה (100-230 ס"מ)'); markError('inp-height'); }
+  if (!weight || isNaN(weight) || weight < 20 || weight > 200) { errors.push('משקל (20-200 ק"ג)'); markError('inp-weight'); }
+  if (!fitness) { errors.push('רמת כושר'); markError('inp-fitness'); }
+  if (!goal)    { errors.push('מטרה'); markError('inp-goal'); }
+
+  if (errors.length > 0) {
+    // Show error banner
+    let banner = document.getElementById('form-error-banner');
+    if (!banner) {
+      banner = document.createElement('div');
+      banner.id = 'form-error-banner';
+      banner.style.cssText = `background:#FFF0F0;border:2px solid #E53935;border-radius:12px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:#B71C1C;font-weight:600;text-align:center;animation:fadeIn 0.3s;`;
+      document.querySelector('.welcome-card').insertBefore(banner, document.querySelector('.welcome-card h3').nextSibling);
+    }
+    banner.innerHTML = `⚠️ אנא מלא את כל השדות:<br><span style="font-weight:400">${errors.join(' • ')}</span>`;
+    // Scroll to first error
+    document.getElementById('inp-'+['name','class','age','height','weight','fitness','goal'].find(f => errors.length && !document.getElementById('inp-'+f).value.trim()))?.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+
+  // Remove error banner if exists
+  const banner = document.getElementById('form-error-banner');
+  if (banner) banner.remove();
+
+  userData = { name, cls, age, height, weight, fitness, goal };
+
+  document.getElementById('hdr-name').textContent = `טוב שבאת, ${name}! 🙌`;
+  document.getElementById('hdr-class').textContent = cls || '';
+
+  // Personal greeting
+  const hour = new Date().getHours();
+  const greet = hour < 12 ? 'בוקר טוב' : hour < 17 ? 'צהריים טובים' : 'ערב טוב';
+  const goalTexts = { 'ירידה במשקל':'נשרוף היום 🔥', 'בניית שריר':'נבנה שריר 💪', 'שיפור כושר':'נשפר כושר 🏃', 'גמישות':'נתמתח ונשתפר 🧘', 'ספורט':'נשתפר בביצועים ⚡', 'בריאות כללית':'נשמור על הבריאות 🌿', 'הרזיה לאחר לידה':'נחזור לכושר 💫', 'כושר גיל הזהב':'נישאר חזקים ובריאים 🌟' };
+  document.getElementById('pg-name').textContent = `${greet}, ${name}! 👋`;
+  document.getElementById('pg-sub').textContent = goalTexts[goal] || 'בואו נתחיל לאמן היום 💪';
+
+  // BMI
+  const bmi = (weight / ((height/100) ** 2)).toFixed(1);
+  let bmiStatus = '', bmiPct = 0;
+  if (bmi < 18.5) { bmiStatus = '⚠️ תת משקל'; bmiPct = 20; }
+  else if (bmi < 25) { bmiStatus = '✅ משקל תקין – מצוין!'; bmiPct = 50; }
+  else if (bmi < 30) { bmiStatus = '⚡ עודף משקל קל'; bmiPct = 70; }
+  else { bmiStatus = '⚠️ השמנה – דבר עם הרופא'; bmiPct = 90; }
+  document.getElementById('bmi-val').textContent = bmi;
+  document.getElementById('bmi-status').textContent = bmiStatus;
+  document.getElementById('bmi-bar').style.width = bmiPct + '%';
+  document.getElementById('bmi-card').style.display = 'block';
+
+  const mi = Math.floor(Math.random() * motivations.length);
+  document.getElementById('daily-motivation').textContent = motivations[mi];
+
+  document.getElementById('screen-welcome').classList.remove('active');
+  document.getElementById('screen-app').classList.add('active');
+
+  renderWorkouts();
+  renderWaterCups();
+  calculateMacros();
+
+  // ✅ שלח כניסה ל-Google Sheets
+  sendToSheets({
+    workoutType: 'כניסה לאפליקציה',
+    workoutName: '—',
+    minutes: 0,
+    points: 0,
+    bmi: bmi
+  });
+
+  // 💾 שמור נתונים מקומית
+  saveToLocal();
+  showSwitchUserBtn();
+}
+
+function showSwitchUserBtn() {
+  if (document.getElementById('switch-user-btn')) return;
+  const hdr = document.querySelector('.app-header');
+  if (!hdr) return;
+  const btn = document.createElement('button');
+  btn.id = 'switch-user-btn';
+  btn.title = 'החלף משתמש';
+  btn.innerHTML = '🔄';
+  btn.style.cssText = 'background:rgba(255,255,255,0.2);border:none;border-radius:50%;width:32px;height:32px;color:white;font-size:16px;cursor:pointer;margin-right:6px;';
+  btn.onclick = () => {
+    if (confirm('להחלף משתמש? הנתונים השמורים של המשתמש הנוכחי יימחקו מהמכשיר הזה.')) clearLocal();
+  };
+  document.querySelector('.header-logo').after(btn);
+}
+
+function calculateMacros() {
+  const { weight, age, goal, fitness } = userData;
+  if (!weight) return;
+
+  const w = parseFloat(weight);
+  const a = parseInt(age) || 16;
+
+  // ── 1. קלוריות בסיס (Mifflin–St Jeor מופשט לנוער)
+  // נניח ממוצע בין זכר/נקבה
+  const bmr = 10 * w + 6.25 * (parseFloat(userData.height)||165) - 5 * a + 5;
+  const activityFactor =
+    fitness === 'מתקדם' || fitness === 'ספורטאי' ? 1.6 :
+    fitness === 'בינוני' ? 1.45 : 1.35;
+  let tdee = Math.round(bmr * activityFactor);
+
+  // ── 2. התאמה למטרה
+  let goalAdj = 0;
+  if (goal === 'ירידה במשקל' || goal === 'הרזיה לאחר לידה') goalAdj = -300;
+  else if (goal === 'בניית שריר') goalAdj = +200;
+  const targetCalories = tdee + goalAdj;
+
+  // ── 3. חישוב מאקרו לפי מטרה ורמה (מבוסס מחקר עדכני 2024)
+  let proteinPct, carbsPct, fatPct;
+  let proteinGperKg;
+
+  if (goal === 'ירידה במשקל' || goal === 'הרזיה לאחר לידה') {
+    // מחקר: 30-35% חלבון, 30% שומן, 35-40% פחמימות לירידה במשקל
+    // חלבון גבוה = שובע + שמירה על שריר
+    proteinGperKg = 1.6;
+    proteinPct = 33;
+    fatPct = 30;
+    carbsPct = 37;
+  } else if (goal === 'בניית שריר') {
+    // חלבון גבוה 1.8-2.0 גרם/ק"ג, פחמימות לאנרגיה
+    proteinGperKg = fitness === 'מתקדם' || fitness === 'ספורטאי' ? 2.0 : 1.8;
+    fatPct = 25;
+    const proteinG = Math.round(w * proteinGperKg);
+    const proteinCal = proteinG * 4;
+    proteinPct = Math.round(proteinCal / targetCalories * 100);
+    carbsPct = 100 - proteinPct - fatPct;
+  } else if (goal === 'שיפור כושר' || goal === 'ספורט') {
+    // אירובי – פחמימות גבוהות לאנרגיה
+    proteinGperKg = 1.4;
+    proteinPct = 25;
+    fatPct = 25;
+    carbsPct = 50;
+  } else if (goal === 'כושר גיל הזהב') {
+    // חלבון חשוב לשמירת שריר, שומן לפרקים
+    proteinGperKg = 1.4;
+    proteinPct = 28;
+    fatPct = 30;
+    carbsPct = 42;
+  } else if (goal === 'גמישות') {
+    proteinGperKg = 1.2;
+    proteinPct = 25;
+    fatPct = 30;
+    carbsPct = 45;
+  } else {
+    // בריאות כללית – 30/30/40
+    proteinGperKg = 1.3;
+    proteinPct = 30;
+    fatPct = 30;
+    carbsPct = 40;
+  }
+
+  // ── 4. חישוב גרמים
+  const proteinG = Math.round(targetCalories * proteinPct / 100 / 4);
+  const carbsG   = Math.round(targetCalories * carbsPct  / 100 / 4);
+  const fatG     = Math.round(targetCalories * fatPct    / 100 / 9);
+
+  // ── 5. עדכון UI
+  // Personal card
+  const pc = document.getElementById('nutrition-personal-card');
+  if (pc) {
+    pc.style.display = 'block';
+    document.getElementById('nutrition-name').textContent =
+      `${userData.name} | ${userData.cls || ''} | ${w} ק"ג`;
+    document.getElementById('nutrition-summary').textContent =
+      `מטרה: ${goal || 'כללי'} | רמה: ${fitness || 'מתחיל'} | ${targetCalories} קלוריות ביום`;
+  }
+
+  // Bars
+  document.getElementById('macro-protein-pct').textContent = proteinPct + '%';
+  document.getElementById('macro-carbs-pct').textContent   = carbsPct   + '%';
+  document.getElementById('macro-fat-pct').textContent     = fatPct     + '%';
+
+  setTimeout(() => {
+    document.getElementById('macro-protein-bar').style.width = proteinPct + '%';
+    document.getElementById('macro-carbs-bar').style.width   = carbsPct   + '%';
+    document.getElementById('macro-fat-bar').style.width     = fatPct     + '%';
+  }, 200);
+
+  document.getElementById('macro-protein-grams').textContent =
+    `כ-${proteinG} גרם ביום (${proteinGperKg ? proteinGperKg+'  גרם/ק"ג' : ''})`;
+  document.getElementById('macro-carbs-grams').textContent =
+    `כ-${carbsG} גרם ביום`;
+  document.getElementById('macro-fat-grams').textContent =
+    `כ-${fatG} גרם ביום`;
+
+  document.getElementById('macro-calories-summary').innerHTML =
+    `🔥 <strong>יעד קלורי יומי:</strong> ${targetCalories} קק"ל` +
+    (goalAdj !== 0 ? ` <span style="font-size:11px;color:var(--text-light)">(${goalAdj > 0 ? '+' : ''}${goalAdj} קק"ל לפי מטרתך)</span>` : '') +
+    `&nbsp;&nbsp;|&nbsp;&nbsp;💧 מים: ${Math.round(w * 0.033 * 10) / 10} ליטר/יום`;
+
+  const tips = {
+    'בניית שריר':   '💪 לבניית שריר: אכול חלבון תוך 30 דקות אחרי כל אימון כוח. פזר צריכת חלבון על 4–5 ארוחות ביום.',
+    'ירידה במשקל':  '🔥 לירידה במשקל: חלבון גבוה (33%) = שובע + שמירת שריר. פחמימות נמוכות (37%) = פחות אינסולין ופחות אגירת שומן. בחרי פחמימות מורכבות בלבד – קטניות, ירקות, דגנים מלאים.',
+    'הרזיה לאחר לידה': '🌸 חזרה לכושר: חלבון גבוה + פחמימות מורכבות + שומנים בריאים. הימנעי מדיאטות קיצוניות – גרעון מתון של 300 קק"ל מספיק.',
+    'שיפור כושר':   '🏃 לאימון אירובי: אכול פחמימות 2 שעות לפני אימון לאנרגיה מיטבית. מיד אחרי – פחמימות + חלבון.',
+    'ספורט':        '⚡ לשיפור ביצועים: טעינת פחמימות לפני אימון אינטנסיבי, חלבון לאחריו.',
+    'כושר גיל הזהב': '🌟 לאחר גיל 50: חלבון חשוב במיוחד לשמירה על מסת שריר. שומן בריא חיוני לפרקים.',
+    'גמישות':       '🧘 לגמישות ובריאות: שומנים בריאים (אבוקדו, אומגה 3) חיוניים לפרקים ולגמישות.',
+    'בריאות כללית': '🌿 לבריאות כללית: גיוון הוא המפתח! צלחת צבעונית = תזונה מאוזנת.'
+  };
+  document.getElementById('macro-tip').textContent =
+    tips[goal] || tips['בריאות כללית'];
+
+  document.getElementById('nutrition-basis').textContent = 'מחושב לפי נתוניך האישיים';
+}
+
+function addWater() {
+  if (waterCount >= 8) { showToast('🎉 שתית 8 כוסות! מדהים!'); return; }
+  waterCount++;
+  document.getElementById('stat-water').textContent = waterCount;
+  renderWaterCups();
+  if (waterCount === 8) showToast('💧 כל הכבוד! שתית 8 כוסות מים היום!');
+  else showToast(`💧 כוס ${waterCount}/8`);
+  saveToLocal();
+}
+
+function renderWaterCups() {
+  const el = document.getElementById('water-cups');
+  if (!el) return;
+  el.innerHTML = Array.from({length:8}, (_, i) =>
+    `<span style="font-size:11px;opacity:${i < waterCount ? 1 : 0.2}">💧</span>`
+  ).join('');
+}
+
+function updateAchievements() {
+  const cards = document.querySelectorAll('.achievement-card');
+  const thresholds = [1, 5, 10, 20];
+  cards.forEach((card, i) => {
+    if (workoutsThisWeek >= thresholds[i]) {
+      card.classList.remove('locked');
+      card.style.border = '2px solid var(--green)';
+    }
+  });
+}
+
+// ===== GUIDED WORKOUT ENGINE =====
+let gState = null; // guided workout state
+
+function startGuidedWorkout(workoutId) {
+  // Find the workout
+  const allGroups = workouts[currentTab] || {};
+  let foundWorkout = null;
+  for (const diff of ['easy','medium','hard']) {
+    const found = (allGroups[diff] || []).find(w => w.id === workoutId);
+    if (found) { foundWorkout = found; break; }
+  }
+  if (!foundWorkout || !foundWorkout.fullExercises) return;
+
+  const restSecs = foundWorkout.rest || 45;
+  const prepareSecs = 5;
+
+  gState = {
+    workout: foundWorkout,
+    exercises: foundWorkout.fullExercises,
+    totalSets: 3,
+    currentSet: 1,
+    currentExIdx: 0,
+    phase: 'prepare', // prepare | work | rest | done
+    secondsLeft: prepareSecs,
+    totalSeconds: prepareSecs,
+    paused: false,
+    interval: null,
+    restSecs,
+    prepareSecs,
+    workoutId
+  };
+
+  renderGuidedStep();
+  document.getElementById('guided-overlay').classList.add('open');
+  gState.interval = setInterval(guidedTick, 1000);
+}
+
+function guidedTick() {
+  if (!gState || gState.paused) return;
+  gState.secondsLeft--;
+  updateGuidedTimer();
+  if (gState.secondsLeft <= 0) guidedNextPhase();
+}
+
+function guidedNextPhase() {
+  const { exercises, currentExIdx, currentSet, totalSets, restSecs, prepareSecs } = gState;
+  const isLastEx = currentExIdx >= exercises.length - 1;
+  const isLastSet = currentSet >= totalSets;
+
+  if (gState.phase === 'prepare') {
+    gState.phase = 'work';
+    gState.secondsLeft = 20; // work display time (user counts reps)
+    gState.totalSeconds = 20;
+  } else if (gState.phase === 'work') {
+    // After work → rest (unless last exercise AND last set)
+    if (isLastEx && isLastSet) {
+      gState.phase = 'done';
+      gState.secondsLeft = 3;
+      gState.totalSeconds = 3;
+    } else {
+      gState.phase = 'rest';
+      gState.secondsLeft = restSecs;
+      gState.totalSeconds = restSecs;
+    }
+  } else if (gState.phase === 'rest') {
+    // After rest → next exercise or next set
+    if (isLastEx) {
+      // Move to next set, reset exercise index
+      gState.currentSet++;
+      gState.currentExIdx = 0;
+    } else {
+      gState.currentExIdx++;
+    }
+    gState.phase = 'prepare';
+    gState.secondsLeft = prepareSecs;
+    gState.totalSeconds = prepareSecs;
+  } else if (gState.phase === 'done') {
+    clearInterval(gState.interval);
+    document.getElementById('guided-overlay').classList.remove('open');
+    completeWorkout(gState.workoutId, gState.workout.name);
+    gState = null;
+    return;
+  }
+  renderGuidedStep();
+}
+
+function renderGuidedStep() {
+  if (!gState) return;
+  const { exercises, currentExIdx, currentSet, totalSets, phase, workout } = gState;
+  const ex = exercises[currentExIdx];
+  const reps = ex ? ex.reps[currentDiff] : 0;
+  const unit = ex ? ex.unit : '';
+  const totalSteps = exercises.length * totalSets;
+  const currentStep = (currentSet - 1) * exercises.length + currentExIdx + 1;
+  const progress = ((currentStep - 1) / totalSteps) * 100;
+
+  // Progress bar
+  document.getElementById('guided-progress-bar').style.width = progress + '%';
+  document.getElementById('guided-workout-name').textContent = workout.name.replace(/[🌟🔥💀]/g,'').trim();
+  document.getElementById('guided-step-label').textContent = `תרגיל ${currentExIdx+1}/${exercises.length} | סט ${currentSet}/${totalSets}`;
+
+  // Phase banner
+  const banner = document.getElementById('guided-phase-banner');
+  banner.className = 'guided-phase-banner';
+  if (phase === 'prepare') {
+    banner.classList.add('prepare');
+    document.getElementById('guided-phase-icon').textContent = '⏳';
+    document.getElementById('guided-phase-text').textContent = 'התכונן לתרגיל!';
+    document.getElementById('guided-timer-circle').style.stroke = '#E65100';
+  } else if (phase === 'work') {
+    banner.classList.add('work');
+    document.getElementById('guided-phase-icon').textContent = '💪';
+    document.getElementById('guided-phase-text').textContent = 'עכשיו עושים!';
+    document.getElementById('guided-timer-circle').style.stroke = 'var(--green)';
+  } else if (phase === 'rest') {
+    banner.classList.add('rest');
+    document.getElementById('guided-phase-icon').textContent = '😮‍💨';
+    document.getElementById('guided-phase-text').textContent = 'מנוחה – תנשום!';
+    document.getElementById('guided-timer-circle').style.stroke = 'var(--primary)';
+  } else if (phase === 'done') {
+    banner.classList.add('done');
+    document.getElementById('guided-phase-icon').textContent = '🎉';
+    document.getElementById('guided-phase-text').textContent = 'סיימת! כל הכבוד!';
+  }
+
+  // Exercise card
+  if (ex) {
+    document.getElementById('guided-ex-icon').textContent = ex.icon;
+    document.getElementById('guided-ex-name').textContent = ex.name;
+    document.getElementById('guided-ex-reps').textContent = phase === 'rest' ? '😮‍💨 נוח...' : `${reps} ${unit}`;
+    document.getElementById('guided-ex-tip').textContent = ex.tip;
+  }
+
+  // Next exercise preview
+  let nextText = '';
+  if (phase === 'rest') {
+    const nextIdx = currentExIdx < exercises.length - 1 ? currentExIdx + 1 : 0;
+    const nextEx = exercises[nextIdx];
+    const nextSet = currentExIdx < exercises.length - 1 ? currentSet : currentSet + 1;
+    if (nextSet <= totalSets) nextText = `${nextEx.icon} ${nextEx.name} – סט ${nextSet}`;
+  }
+  document.getElementById('guided-next-text').textContent = nextText;
+  document.getElementById('guided-next').style.display = nextText ? 'block' : 'none';
+
+  updateGuidedTimer();
+}
+
+function updateGuidedTimer() {
+  if (!gState) return;
+  document.getElementById('guided-timer-num').textContent = gState.secondsLeft;
+  // Circle animation
+  const circumference = 326.7;
+  const ratio = gState.secondsLeft / gState.totalSeconds;
+  const offset = circumference * (1 - ratio);
+  document.getElementById('guided-timer-circle').style.strokeDashoffset = offset;
+}
+
+function guidedPause() {
+  if (!gState) return;
+  gState.paused = !gState.paused;
+  const btn = document.getElementById('guided-pause-btn');
+  btn.textContent = gState.paused ? '▶ המשך' : '⏸ השהה';
+  btn.classList.toggle('paused', gState.paused);
+}
+
+function guidedSkip() {
+  if (!gState) return;
+  gState.secondsLeft = 0;
+  guidedNextPhase();
+}
+
+function stopGuidedWorkout() {
+  if (gState) { clearInterval(gState.interval); gState = null; }
+  document.getElementById('guided-overlay').classList.remove('open');
+}
+
+// ===== CELEBRATION =====
+function showCelebration(workoutName, pts) {
+  const emojis = ['🎉','🏆','⭐','🔥','💪','🥇'];
+  const e = emojis[Math.floor(Math.random()*emojis.length)];
+  document.getElementById('cel-emoji').textContent = e;
+  document.getElementById('cel-title').textContent = 'כל הכבוד!';
+  document.getElementById('cel-sub').textContent = `סיימת: ${workoutName}\nהגוף שלך מודה לך! 💙`;
+  document.getElementById('cel-points').textContent = `+${pts} נקודות 🏆 | סה"כ: ${points}`;
+  document.getElementById('celebration-overlay').classList.add('show');
+  launchConfetti();
+}
+
+function closeCelebration() {
+  document.getElementById('celebration-overlay').classList.remove('show');
+}
+
+function launchConfetti() {
+  const colors = ['#4A90A4','#E8A87C','#6BBF8E','#9B8EC4','#E8909A','#FFD700'];
+  for (let i = 0; i < 40; i++) {
+    setTimeout(() => {
+      const c = document.createElement('div');
+      c.className = 'confetti-piece';
+      c.style.cssText = `left:${Math.random()*100}vw;top:0;background:${colors[Math.floor(Math.random()*colors.length)]};width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;animation-duration:${1+Math.random()*1.5}s;animation-delay:${Math.random()*0.5}s;border-radius:${Math.random()>0.5?'50%':'2px'}`;
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 2500);
+    }, i * 30);
+  }
+}
+
+// ===== NAV =====
+function goSection(sec, btn) {
+  // חסום גישה לאימונים ללא רישום
+  if ((sec === 'workouts') && !userData.name) {
+    showToast('🔒 יש למלא פרטים בדף הכניסה תחילה!');
+    return;
+  }
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('sec-'+sec).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  else {
+    document.querySelectorAll('.nav-btn').forEach(b => {
+      if (b.querySelector('.label') && b.querySelector('.label').textContent.trim().includes(
+        sec === 'home' ? 'בית' : sec === 'workouts' ? 'אימונים' : sec === 'nutrition' ? 'תזונה' : sec === 'progress' ? 'התקדמות' : 'שאל'
+      )) b.classList.add('active');
+    });
+  }
+}
+
+function goToWorkout(type) {
+  if (!userData.name) { showToast('🔒 יש למלא פרטים בדף הכניסה תחילה!'); return; }
+  currentTab = type;
+  goSection('workouts');
+  renderWorkouts();
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.includes(type === 'strength' ? 'כוח' : 'אירובי'));
+  });
+}
+
+// ===== WORKOUTS =====
+function switchWorkoutTab(btn, tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderWorkouts();
+}
+
+function filterDiff(btn, diff) {
+  currentDiff = diff;
+  document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderWorkouts();
+}
+
+function renderWorkouts() {
+  const list = document.getElementById('workout-list');
+  const data = (workouts[currentTab] || {})[currentDiff] || [];
+  if (!data.length) {
+    list.innerHTML = `<div style="text-align:center;padding:40px;color:var(--text-light)">אין אימונים בדרגה זו עדיין 🚧<br><small>בחר רמת קושי אחרת</small></div>`;
+    return;
+  }
+  list.innerHTML = data.map(w => {
+    const id = w.id;
+    if (!timerSeconds[id]) timerSeconds[id] = w.rest > 0 ? w.rest : 60;
+    if (!currentSets[id]) currentSets[id] = 1;
+
+    const diffLabel = currentDiff === 'easy' ? '🟢 קל' : currentDiff === 'medium' ? '🟡 בינוני' : '🔴 קשה';
+    const isFullWorkout = !!w.isFullWorkout;
+
+    let exerciseHTML = '';
+    if (isFullWorkout && w.fullExercises) {
+      exerciseHTML = `
+        <div style="background:linear-gradient(135deg,#F8F9FA,#EDF2F7);border-radius:12px;padding:14px;margin-bottom:12px;">
+          <div style="font-size:13px;font-weight:700;color:var(--text-light);margin-bottom:10px;">📋 תוכנית האימון – 3 סטים | מנוחה ${w.rest} שניות בין סטים</div>
+          <table style="width:100%;border-collapse:collapse;font-size:13px;">
+            <thead>
+              <tr style="background:var(--primary);color:white;">
+                <th style="padding:8px 6px;text-align:right;border-radius:8px 0 0 0;">תרגיל</th>
+                <th style="padding:8px 6px;text-align:center;">🟢 קל</th>
+                <th style="padding:8px 6px;text-align:center;">🟡 בינוני</th>
+                <th style="padding:8px 6px;text-align:center;border-radius:0 8px 0 0;">🔴 קשה</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${w.fullExercises.map((ex, i) => `
+                <tr style="background:${i%2===0?'white':'#F7FAFC'}">
+                  <td style="padding:8px 6px;font-weight:600;">${ex.icon} ${ex.name}<br><span style="font-size:10px;color:var(--text-light);font-weight:400">${ex.tip}</span></td>
+                  <td style="padding:8px 6px;text-align:center;color:#2E7D52;font-weight:700;">${ex.reps.easy} ${ex.unit}</td>
+                  <td style="padding:8px 6px;text-align:center;color:#E65100;font-weight:700;">${ex.reps.medium} ${ex.unit}</td>
+                  <td style="padding:8px 6px;text-align:center;color:#C62828;font-weight:700;">${ex.reps.hard} ${ex.unit}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+          <div style="margin-top:10px;padding:8px 12px;background:rgba(74,144,164,0.1);border-radius:8px;font-size:12px;color:var(--primary);font-weight:600;">
+            ⏱️ סה״כ זמן אימון משוער: ${w.totalTime}
+          </div>
+        </div>
+        <button onclick="startGuidedWorkout('${id}')" style="width:100%;padding:14px;background:linear-gradient(135deg,var(--primary),var(--primary-light));color:white;border:none;border-radius:var(--radius-sm);font-family:'Heebo',sans-serif;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:10px;">
+          🚀 התחל אימון מודרך!
+        </button>`;
+    } else {
+      exerciseHTML = `<ul class="exercise-list">${(w.exercises||[]).map(e => `<li>${e}</li>`).join('')}</ul>`;
+    }
+
+    return `
+    <div class="workout-card" id="card-${id}" style="${isFullWorkout ? 'border:2px solid var(--primary);' : ''}">
+      <div class="workout-card-header" onclick="toggleDetails('${id}')">
+        <div class="workout-icon-wrap" style="background:${w.color}">${w.icon}</div>
+        <div class="workout-info">
+          <div class="workout-name">${w.name}</div>
+          <div class="workout-meta">${isFullWorkout ? `⏳ ${w.totalTime} | 3 סטים | ${(w.fullExercises||[]).length} תרגילים` : `סטים: ${w.sets} | ${w.isTime ? w.reps+' דקות' : 'חזרות: '+w.reps}`}</div>
+          <div class="workout-badges">
+            <span class="badge ${currentDiff}">${diffLabel}</span>
+            <span class="badge sets">💪 3 סטים</span>
+            ${w.rest ? `<span class="badge time">⏸️ ${w.rest}ש׳ מנוחה</span>` : ''}
+            ${isFullWorkout ? `<span class="badge sets" style="background:#E8F0FE;color:#3C4043;">📋 אימון שלם</span>` : ''}
+          </div>
+        </div>
+        <button class="workout-expand-btn" id="expand-${id}">▼</button>
+      </div>
+      <div class="workout-details" id="details-${id}">
+        ${exerciseHTML}
+        ${!isFullWorkout ? `
+        <div class="timer-panel">
+          <div style="font-size:13px;opacity:0.7;margin-bottom:8px">⏱️ שעון עצר – מנוחה בין סטים</div>
+          <div class="timer-display" id="timer-${id}">00:${String(timerSeconds[id]).padStart(2,'0')}</div>
+          <div class="timer-controls">
+            <button class="timer-btn start" id="tbtn-${id}" onclick="toggleTimer('${id}')">▶ התחל</button>
+            <button class="timer-btn reset" onclick="resetTimer('${id}',${w.rest || 60})">↺ אפס</button>
+          </div>
+          <div class="sets-counter">
+            <button class="sets-btn" onclick="changeSets('${id}',-1)">−</button>
+            <div class="sets-info" id="sets-${id}">סט ${currentSets[id]} מתוך 3</div>
+            <button class="sets-btn" onclick="changeSets('${id}',1)">+</button>
+          </div>
+        </div>` : ''}
+        <div class="music-player">
+          <div class="music-icon">🎵</div>
+          <div class="music-info">
+            <div class="music-title">${w.music.title}</div>
+            <div class="music-artist">${w.music.artist}</div>
+          </div>
+          <button class="music-ctrl" onclick="openMusic('${w.music.title}')">▶</button>
+        </div>
+        <div class="video-section">
+          <h4>📹 סרטון הדגמה</h4>
+          <div class="video-placeholder" onclick="openVideo('${w.video}')">
+            <div class="play-btn">▶️</div>
+            <div class="video-title">${w.name}</div>
+            <div class="video-link">לחץ לחיפוש ב-YouTube ←</div>
+          </div>
+        </div>
+        <button class="complete-btn" onclick="completeWorkout('${id}','${w.name}')" style="width:100%;margin-top:14px;padding:12px;background:linear-gradient(135deg,var(--green),#4DAA6E);color:white;border:none;border-radius:var(--radius-sm);font-family:'Heebo',sans-serif;font-size:15px;font-weight:700;cursor:pointer;">
+          ✅ סיימתי את האימון! (+10 נקודות)
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleDetails(id) {
+  const d = document.getElementById('details-'+id);
+  const btn = document.getElementById('expand-'+id);
+  const open = d.classList.toggle('open');
+  btn.style.transform = open ? 'rotate(180deg)' : '';
+}
+
+// Timer
+function toggleTimer(id) {
+  if (timerRunning[id]) {
+    clearInterval(timerIntervals[id]);
+    timerRunning[id] = false;
+    document.getElementById('tbtn-'+id).textContent = '▶ המשך';
+  } else {
+    timerRunning[id] = true;
+    document.getElementById('tbtn-'+id).textContent = '⏸ עצור';
+    timerIntervals[id] = setInterval(() => {
+      if (timerSeconds[id] <= 0) {
+        clearInterval(timerIntervals[id]);
+        timerRunning[id] = false;
+        document.getElementById('tbtn-'+id).textContent = '▶ התחל';
+        showToast('⏰ הזמן עבר! עבור לסט הבא');
+        return;
+      }
+      timerSeconds[id]--;
+      updateTimerDisplay(id);
+    }, 1000);
+  }
+}
+
+function resetTimer(id, secs) {
+  clearInterval(timerIntervals[id]);
+  timerRunning[id] = false;
+  timerSeconds[id] = secs;
+  updateTimerDisplay(id);
+  const btn = document.getElementById('tbtn-'+id);
+  if (btn) btn.textContent = '▶ התחל';
+}
+
+function updateTimerDisplay(id) {
+  const el = document.getElementById('timer-'+id);
+  if (!el) return;
+  const m = Math.floor(timerSeconds[id] / 60);
+  const s = timerSeconds[id] % 60;
+  el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+function changeSets(id, delta) {
+  currentSets[id] = Math.max(1, (currentSets[id] || 1) + delta);
+  const el = document.getElementById('sets-'+id);
+  if (el) el.textContent = `סט ${currentSets[id]} מתוך 3`;
+}
+
+function openVideo(query) {
+  window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(query + ' exercise'), '_blank');
+}
+
+function openMusic(title) {
+  window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(title + ' workout music'), '_blank');
+}
+
+function completeWorkout(id, name) {
+  // Mark as done visually
+  const btn = document.querySelector(`#card-${id} .complete-btn`);
+  if (btn) {
+    btn.outerHTML = `<div class="workout-done-badge">✅ אימון הושלם! כל הכבוד! 🏆</div>`;
+  }
+  completedWorkoutIds.add(id);
+
+  const pts = 10;
+  points += pts;
+  workoutsThisWeek++;
+  totalMinutes += 30;
+  document.getElementById('hdr-points').textContent = points + ' נקודות';
+  document.getElementById('stat-workouts').textContent = workoutsThisWeek;
+  document.getElementById('stat-minutes').textContent = totalMinutes;
+  document.getElementById('stat-streak').textContent = workoutsThisWeek;
+
+  updateAchievements();
+  showCelebration(name, pts);
+  saveToLocal();
+
+  // שמירה ב-Google Sheets
+  const tabMap = { strength:'כוח', cardio:'אירובי', flexibility:'גמישות' };
+  sendToSheets({ workoutType: tabMap[currentTab] || currentTab, workoutName: name, minutes: 30, points: points });
+}
+
+function logWorkout() {
+  const type = document.getElementById('log-type').value;
+  const mins = parseInt(document.getElementById('log-mins').value) || 0;
+  if (!mins || mins < 5) { showToast('הכנס לפחות 5 דקות!'); return; }
+  if (mins > 180) { showToast('מקסימום 180 דקות לאימון!'); return; }
+  totalMinutes += mins;
+  workoutsThisWeek++;
+  points += 5;
+  document.getElementById('stat-workouts').textContent = workoutsThisWeek;
+  document.getElementById('stat-minutes').textContent = totalMinutes;
+  document.getElementById('hdr-points').textContent = points + ' נקודות';
+  showToast('✅ אימון ' + type + ' נרשם! ' + mins + ' דקות (+5 נקודות)');
+  saveToLocal();
+
+  // שמירה ב-Google Sheets
+  sendToSheets({ workoutType: type, workoutName: 'אימון ידני', minutes: mins, points: points });
+}
+
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyUTGgmW-bANyYtz4JJRgTRbdYosE-gB7-lEtP72q5LsVSAK2dSJt6AguhfW6ybwPAS/exec';
+
+function sendToSheets(workoutData) {
+  const bmi = workoutData.bmi ||
+    (userData.height && userData.weight
+      ? (userData.weight / ((userData.height/100)**2)).toFixed(1)
+      : '');
+  const payload = {
+    name: userData.name || '',
+    cls: userData.cls || '',
+    age: userData.age || '',
+    height: userData.height || '',
+    weight: userData.weight || '',
+    bmi,
+    goal: userData.goal || '',
+    workoutType: workoutData.workoutType || '',
+    workoutName: workoutData.workoutName || '',
+    minutes: workoutData.minutes || '',
+    points: workoutData.points || ''
+  };
+  fetch(SHEETS_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(() => {});
+}
+
+// ===== AI CHAT =====
+let isChatLoading = false;
+
+const aiAnswers = {
+  'כמה פעמים בשבוע כדאי להתאמן?': `מצוין ששאלת! 💪 ההמלצה הכללית:\n• מתחילים: 2-3 פעמים בשבוע\n• בינוניים: 3-4 פעמים\n• מתקדמים: 4-5 פעמים\nחשוב לתת לגוף יום מנוחה בין אימוני כוח! יום מנוחה = יום שהשרירים גדלים 😊`,
+  'מה לאכול לפני אימון?': `לפני אימון אכול/י:\n🍌 פחמימות מהירות (בננה, לחם, אורז) – אנרגיה!\n🥜 קצת חלבון (בוטנים, יוגורט)\n💧 שתה/י הרבה מים\n⏰ 1-2 שעות לפני אימון. לא לאכול כבד ממש לפני!`,
+  'איך מחזקים שרירי בטן?': `שרירי בטן חזקים = גוף בריא! 💪\nהתרגילים הטובים ביותר:\n1. פלאנק – 30-60 שניות\n2. קראנצ׳ – 3×15\n3. Mountain Climbers\n4. ליגת רגלים שוכבת\nזכור/י: בטן שטוחה נבנית 70% בתזונה! 🥗`,
+  'מה זה BMI ואיך מחשבים?': `BMI = Body Mass Index = מדד מסת הגוף 📊\nנוסחה: משקל (ק"ג) ÷ גובה² (מטר)\nדוגמה: 60 ÷ (1.65)² = 22.0\n\nטווח תקין: 18.5 – 24.9\nתת משקל: מתחת 18.5\nעודף משקל: 25-29.9\n⚠️ BMI לא מספר מושלם – שרירים שוקלים יותר מגוף!`,
+  'כמה מים לשתות ביום?': `💧 המלצה:\n• ממוצע: 8 כוסות (2 ליטר) ביום\n• ביום אימון: +2-3 כוסות נוספות\n• בקיץ: עוד יותר!\n\nטיפ: שתה כוס מים עם קימה, לפני כל ארוחה, ואחרי האימון!\nצבע שתן צהוב בהיר = שתייה מספקת ✅`,
+  'איך להתחיל לרוץ?': `🏃 תוכנית C25K (Couch to 5K) מושלמת למתחילים!\nשבוע 1: 60 שניות ריצה + 90 שניות הליכה × 8\nשבוע 2: 90 שניות ריצה + 2 דקות הליכה × 6\nשבוע 3-4: הגדל בהדרגה\n\nטיפים: נעלי ריצה טובות, חמם לפני, קר אחרי!`
+};
+
+function getChatTime() {
+  const now = new Date();
+  return `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+}
+
+function escapeHtml(str) {
+  const d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+
+function addMsg(text, role) {
+  const chat = document.getElementById('chat-box');
+  const time = getChatTime();
+  const isAI = role === 'ai';
+  const div = document.createElement('div');
+  div.className = `msg ${role}`;
+  const safe = escapeHtml(text).replace(/\n/g,'<br>');
+  div.innerHTML = `
+    ${isAI ? '<div class="msg-sender">🏋️ אורית AI</div>' : '<div class="msg-sender">אני</div>'}
+    <div>${safe}</div>
+    <div class="msg-time">${time}</div>`;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+  return div;
+}
+
+function setChatLoading(state) {
+  isChatLoading = state;
+  const btn = document.getElementById('ask-send-btn');
+  const input = document.getElementById('ask-input');
+  if (btn) {
+    btn.disabled = state;
+    btn.style.opacity = state ? '0.5' : '1';
+    btn.textContent = state ? '⏳' : '📤';
+  }
+  if (input) input.disabled = state;
+}
+
+async function sendQuestion() {
+  const input = document.getElementById('ask-input');
+  const q = input.value.trim();
+  if (!q || isChatLoading) return;
+
+  if (q.length > 500) {
+    showToast('ההודעה ארוכה מדי (מקסימום 500 תווים)');
+    return;
+  }
+
+  input.value = '';
+  setChatLoading(true);
+  addMsg(q, 'user');
+
+  const chat = document.getElementById('chat-box');
+  const typing = document.createElement('div');
+  typing.id = 'typing-indicator';
+  typing.className = 'typing';
+  typing.innerHTML = '<span></span><span></span><span></span>';
+  chat.appendChild(typing);
+  chat.scrollTop = chat.scrollHeight;
+
+  const localAnswer = aiAnswers[q] || null;
+
+  if (localAnswer) {
+    setTimeout(() => {
+      typing.remove();
+      addMsg(localAnswer, 'ai');
+      setChatLoading(false);
+    }, 800);
+    return;
+  }
+
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 25000);
+
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      signal: controller.signal,
+      body: JSON.stringify({
+        message: q,
+        context: {
+          name: userData.name || '',
+          age: userData.age || '',
+          goal: userData.goal || ''
+        }
+      })
+    });
+
+    clearTimeout(timeout);
+
+    if (res.status === 429) {
+      throw new Error('rate-limit');
+    }
+    if (!res.ok) {
+      const errData = await res.json().catch(() => ({}));
+      throw new Error(errData.error || `HTTP ${res.status}`);
+    }
+
+    const data = await res.json();
+    if (!data.answer) throw new Error('תשובה ריקה');
+
+    typing.remove();
+    addMsg(data.answer, 'ai');
+
+  } catch (err) {
+    typing.remove();
+    let errMsg = '';
+    if (err.name === 'AbortError') {
+      errMsg = '⏱️ השרת לא הגיב בזמן. נסה/י שוב בעוד רגע!';
+    } else if (!navigator.onLine) {
+      errMsg = '📶 אין חיבור לאינטרנט. בדוק/י את החיבור ונסה/י שוב.';
+    } else if (err.message === 'rate-limit') {
+      errMsg = '⏳ יותר מדי הודעות. נסה/י שוב בעוד דקה!';
+    } else {
+      errMsg = '⚠️ משהו השתבש. נסה/י שוב או שאל/י את אורית ישירות! 😊';
+    }
+    addMsg(errMsg, 'ai');
+  } finally {
+    setChatLoading(false);
+  }
+}
+
+function askQuestion(q) {
+  if (isChatLoading) return;
+  const input = document.getElementById('ask-input');
+  input.value = q;
+  input.focus();
+  sendQuestion();
+}
+
+// ===== UTILS =====
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// Init macro bar animation on load
+setTimeout(() => {
+  document.querySelectorAll('.macro-fill').forEach(el => {
+    const w = el.style.width;
+    el.style.width = '0';
+    setTimeout(() => el.style.width = w, 100);
+  });
+}, 500);
+</script>
+</body>
+</html>
